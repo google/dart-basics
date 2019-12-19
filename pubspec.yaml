@@ -1,0 +1,6 @@
+name: basics
+description: A Dart library containing convenient extension methods on basic Dart objects.
+version: 0.1.0
+dev_dependencies:
+  test: ^1.9.4
+  quiver: ^2.1.2+1
