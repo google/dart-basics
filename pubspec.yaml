@@ -7,7 +7,7 @@ authors:
   - garciaz@google.com <garciaz@google.com>
 
 environment:
-  sdk: ">=2.7.0 <2.9.0"
+  sdk: ">=2.7.0 <3.0.0"
 dependencies:
   quiver: ^2.1.2+1
 dev_dependencies:
