@@ -16,6 +16,7 @@ extension StringBasics on String {
   /// 'ABC'.compareTo('abc'); // zero
   /// 'ABC'.compareTo('abb'); // positive value
   /// ```
+  ///
   /// NOTE: This implementation relies on [String].`toLowerCase`, which is not
   /// locale aware. Therefore, this method is likely to exhibit unexpected
   /// behavior for non-ASCII characters.
