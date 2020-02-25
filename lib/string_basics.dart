@@ -3,9 +3,112 @@
 // license that can be found in the LICENSE file.
 
 import 'src/slice_indices.dart';
+import 'package:quiver/strings.dart' as quiver_strings;
 
 /// Utility extension methods for the native [String] class.
 extension StringBasics on String {
+  /// Returns a value according to the contract for [Comparator] indicating
+  /// the ordering between [this] and [other], ignoring letter case.
+  ///
+  /// Example:
+  /// ```dart
+  /// 'ABC'.compareTo('abd'); // negative value
+  /// 'ABC'.compareTo('abc'); // zero
+  /// 'ABC'.compareTo('abb'); // positive value
+  /// ```
+  /// NOTE: This implementation relies on [String].`toLowerCase`, which is not
+  /// locale aware. Therefore, this method is likely to exhibit unexpected
+  /// behavior for non-ASCII characters.
+  int compareToIgnoringCase(String other) =>
+      this.toLowerCase().compareTo(other.toLowerCase());
+
+  /// Syntactic sugar for calling Quiver [isBlank] as a getter.
+  bool get isBlank => quiver_strings.isBlank(this);
+
+  /// Syntactic sugar for calling Quiver [isNotBlank] as a getter.
+  bool get isNotBlank => quiver_strings.isNotBlank(this);
+
+  /// Returns a copy of [this] with [prefix] removed if it is present.
+  ///
+  /// If [this] does not start with [prefix], returns [this].
+  ///
+  /// Example:
+  /// ```dart
+  /// var string = 'abc';
+  /// string.withoutPrefix('ab'); // 'c'
+  /// string.withoutPrefix('z'); // 'abc'
+  /// ```
+  String withoutPrefix(Pattern prefix) => this.startsWith(prefix)
+      ? this.substring(prefix.allMatches(this).first.end)
+      : this;
+
+  /// Returns a copy of [this] with [suffix] removed if it is present.
+  ///
+  /// If [this] does not end with [suffix], returns [this].
+  ///
+  /// Example:
+  /// ```dart
+  /// var string = 'abc';
+  /// string.withoutSuffix('bc'); // 'a';
+  /// string.withoutSuffix('z'); // 'abc';
+  /// ```
+  String withoutSuffix(Pattern suffix) {
+    // Can't use endsWith because that takes a String, not a Pattern.
+    final matches = suffix.allMatches(this);
+    return (matches.isEmpty || matches.last.end != this.length)
+        ? this
+        : this.substring(0, matches.last.start);
+  }
+
+  /// Returns a copy of [this] with [other] inserted starting at [index].
+  ///
+  /// Example:
+  /// ```dart
+  /// 'word'.insert('s', 0); // 'sword'
+  /// 'word'.insert('ke', 3); // 'worked'
+  /// 'word'.insert('y', 4); // 'wordy'
+  /// ```
+  String insert(String other, int index) => (StringBuffer()
+        ..write(this.substring(0, index))
+        ..write(other)
+        ..write(this.substring(index)))
+      .toString();
+
+  /// Returns the concatenation of [other] and [this].
+  ///
+  /// Example:
+  /// ```dart
+  /// 'word'.prepend('key'); // 'keyword'
+  /// ```
+  String prepend(String other) => other + this;
+
+  /// Divides string into everything before [pattern], [pattern], and everything
+  /// after [pattern].
+  ///
+  /// Example:
+  /// ```dart
+  /// 'word'.partition('or'); // ['w', 'or', 'd']
+  /// ```
+  ///
+  /// If [pattern] is not found, the entire string is treated as coming before
+  /// [pattern].
+  ///
+  /// Example:
+  /// ```dart
+  /// 'word'.partition('z'); // ['word', '', '']
+  /// ```
+  List<String> partition(Pattern pattern) {
+    final matches = pattern.allMatches(this);
+    if (matches.isEmpty) return [this, '', ''];
+    final matchStart = matches.first.start;
+    final matchEnd = matches.first.end;
+    return [
+      this.substring(0, matchStart),
+      this.substring(matchStart, matchEnd),
+      this.substring(matchEnd)
+    ];
+  }
+
   /// Returns a new string containing the characters of [this] from [start]
   /// inclusive to [end] exclusive, skipping by [step].
   ///
@@ -74,6 +177,24 @@ extension StringBasics on String {
       for (var i = _start; i > _end; i += step) {
         stringBuffer.write(this[i]);
       }
+    }
+    return stringBuffer.toString();
+  }
+
+  /// Returns [this] with characters in reverse order.
+  ///
+  /// Example:
+  /// ```dart
+  /// 'word'.reverse(); // 'drow'
+  /// ```
+  ///
+  /// WARNING: This is the naive-est possible implementation, relying on native
+  /// string indexing. Therefore, this method is almost guaranteed to exhibit
+  /// unexpected behavior for non-ASCII characters.
+  String reverse() {
+    final stringBuffer = StringBuffer();
+    for (var i = this.length - 1; i >= 0; i--) {
+      stringBuffer.write(this[i]);
     }
     return stringBuffer.toString();
   }
