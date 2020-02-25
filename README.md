@@ -1,7 +1,7 @@
 # Dart Basics
 
 This repository contains a collection of useful extension methods on the built
-in objects in Dart, such as Strings, Collections, and Object.
+in objects in Dart, such as Strings, Iterables, and Object.
 
 ## Usage
 Import the basics library.
@@ -19,7 +19,9 @@ if (numbers.isNull) {
   print('numbers is uninitialized').
 }
 
-numbers = [2, 4, 8];
+for (var i in 10.range) {
+  if (i.isEven) numbers.add(i);
+}
 
 if (numbers.isNotNull && numbers.all(isEven)) {
   print('all numbers are even');
