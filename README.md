@@ -19,10 +19,12 @@ if (numbers.isNull) {
   print('Numbers is uninitialized');
 }
 
-numbers = [1, 4, 7];
+for (var i in 1.to(10)) {
+  if (i.isEven) numbers.add(i);
+}
 
-if (numbers.isNotNull && numbers.one(isEven)) {
-  print('Exactly one number is even');
+if (numbers.isNotNull && numbers.all(isEven)) {
+  print('All numbers are even');
 }
 ```
 
