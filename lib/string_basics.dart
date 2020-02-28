@@ -12,9 +12,9 @@ extension StringBasics on String {
   ///
   /// Example:
   /// ```dart
-  /// 'ABC'.compareTo('abd'); // negative value
-  /// 'ABC'.compareTo('abc'); // zero
-  /// 'ABC'.compareTo('abb'); // positive value
+  /// 'ABC'.compareToIgnoringCase('abd'); // negative value
+  /// 'ABC'.compareToIgnoringCase('abc'); // zero
+  /// 'ABC'.compareToIgnoringCase('abb'); // positive value
   /// ```
   ///
   /// NOTE: This implementation relies on [String].`toLowerCase`, which is not
