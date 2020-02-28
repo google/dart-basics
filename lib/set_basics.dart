@@ -9,10 +9,10 @@ extension SetBasics<E> on Set<E> {
   /// Example:
   /// ```dart
   /// var set = {'a', 'b', 'c'};
-  /// set.isEqual({'b', 'a', 'c'}); // true
-  /// set.isEqual({'b', 'a', 'f'}); // false
-  /// set.isEqual({'a', 'b'}); // false
-  /// set.isEqual({'a', 'b', 'c', 'd'}); // false
+  /// set.isEqualTo({'b', 'a', 'c'}); // true
+  /// set.isEqualTo({'b', 'a', 'f'}); // false
+  /// set.isEqualTo({'a', 'b'}); // false
+  /// set.isEqualTo({'a', 'b', 'c', 'd'}); // false
   /// ```
   bool isEqualTo(Set<Object> other) =>
       this.length == other.length &&
@@ -23,8 +23,8 @@ extension SetBasics<E> on Set<E> {
   /// Example:
   /// ```dart
   /// var set = {'a', 'b', 'c'};
-  /// set.isDisjoint({'d', 'e', 'f'}); // true
-  /// set.isDisjoint({'d', 'e', 'b'}); // false
+  /// set.isDisjointWith({'d', 'e', 'f'}); // true
+  /// set.isDisjointWith({'d', 'e', 'b'}); // false
   /// ```
   bool isDisjointWith(Set<Object> other) => this.intersection(other).isEmpty;
 
@@ -33,8 +33,8 @@ extension SetBasics<E> on Set<E> {
   /// Example:
   /// ```dart
   /// var set = {'a', 'b', 'c'};
-  /// set.isIntersecting({'d', 'e', 'b'}); // true
-  /// set.isIntersecting({'d', 'e', 'f'}); // false
+  /// set.isIntersectingWith({'d', 'e', 'b'}); // true
+  /// set.isIntersectingWith({'d', 'e', 'f'}); // false
   /// ```
   bool isIntersectingWith(Set<Object> other) =>
       this.intersection(other).isNotEmpty;
@@ -44,9 +44,9 @@ extension SetBasics<E> on Set<E> {
   /// Example:
   /// ```dart
   /// var set = {'a', 'b', 'c'};
-  /// set.isSubset({'a', 'b', 'c', 'd'}); // true
-  /// set.isSubset({'a', 'b', 'c'}); // true
-  /// set.isSubset({'a', 'b', 'f'}); // false
+  /// set.isSubsetOf({'a', 'b', 'c', 'd'}); // true
+  /// set.isSubsetOf({'a', 'b', 'c'}); // true
+  /// set.isSubsetOf({'a', 'b', 'f'}); // false
   /// ```
   bool isSubsetOf(Set<Object> other) =>
       this.length <= other.length && other.containsAll(this);
@@ -55,9 +55,9 @@ extension SetBasics<E> on Set<E> {
   ///
   /// ```dart
   /// var set = {'a', 'b', 'c'};
-  /// set.isSuperset({'a', 'b'}); // true
-  /// set.isSuperset({'a', 'b', 'c'}); // true
-  /// set.isSuperset({'a', 'b', 'f'}); // false
+  /// set.isSupersetOf({'a', 'b'}); // true
+  /// set.isSupersetOf({'a', 'b', 'c'}); // true
+  /// set.isSupersetOf({'a', 'b', 'f'}); // false
   /// ```
   bool isSupersetOf(Set<Object> other) =>
       this.length >= other.length && this.containsAll(other);
@@ -68,9 +68,9 @@ extension SetBasics<E> on Set<E> {
   /// Example:
   /// ```dart
   /// var set = {'a', 'b', 'c'};
-  /// set.isStrictSubset({'a', 'b', 'c', 'd'}); // true
-  /// set.isStrictSubset({'a', 'b', 'c'}); // false
-  /// set.isStrictSubset({'a', 'b', 'f'}); // false
+  /// set.isStrictSubsetOf({'a', 'b', 'c', 'd'}); // true
+  /// set.isStrictSubsetOf({'a', 'b', 'c'}); // false
+  /// set.isStrictSubsetOf({'a', 'b', 'f'}); // false
   /// ```
   bool isStrictSubsetOf(Set<Object> other) =>
       this.length < other.length && other.containsAll(this);
@@ -80,9 +80,9 @@ extension SetBasics<E> on Set<E> {
   ///
   /// ```dart
   /// var set = {'a', 'b', 'c'};
-  /// set.isStrictSuperset({'a', 'b'}); // true
-  /// set.isStrictSuperset({'a', 'b', 'c'}); // false
-  /// set.isStrictSuperset({'a', 'b', 'f'}); // false
+  /// set.isStrictSupersetOf({'a', 'b'}); // true
+  /// set.isStrictSupersetOf({'a', 'b', 'c'}); // false
+  /// set.isStrictSupersetOf({'a', 'b', 'f'}); // false
   /// ```
   bool isStrictSupersetOf(Set<Object> other) =>
       this.length > other.length && this.containsAll(other);
