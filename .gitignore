@@ -1,0 +1,18 @@
+# Reference: <https://dart.dev/guides/libraries/private-files>
+
+# pub stuff.
+.dart_tool/
+.packages
+build/
+.pub/
+pubspec.lock
+doc/api/
+
+# IntelliJ stuff.
+*.iml
+*.ipr
+*.iws
+.idea
+
+# macOS stuff.
+.DS_Store
