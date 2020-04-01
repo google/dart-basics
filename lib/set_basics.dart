@@ -15,8 +15,7 @@ extension SetBasics<E> on Set<E> {
   /// set.isEqualTo({'a', 'b', 'c', 'd'}); // false
   /// ```
   bool isEqualTo(Set<Object> other) =>
-      this.length == other.length &&
-      this.length == this.intersection(other).length;
+      this.length == other.length && this.containsAll(other);
 
   /// Returns `true` if [this] and [other] have no elements in common.
   ///
