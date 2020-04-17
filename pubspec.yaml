@@ -4,7 +4,7 @@
 
 name: basics
 description: A Dart library containing convenient extension methods on basic Dart objects.
-version: 0.3.0
+version: 0.4.0
 homepage: https://github.com/google/dart-basics
 authors:
   - johnsonmh@google.com <johnsonmh@google.com>

@@ -1,3 +1,7 @@
+## [0.4.0]
+
+Added `MapBasics.get`.
+
 ## [0.3.0]
 
 Added `DateTimeBasics`.
