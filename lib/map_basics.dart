@@ -29,4 +29,16 @@ extension MapBasics<K, V> on Map<K, V> {
     }
     return inverted;
   }
+
+  /// A type-checked version of [operator []] that additionally supports
+  /// returning a default value.
+  ///
+  /// Returns [defaultValue] if the key is not found.  This is slightly
+  /// different from `map[key] ?? defaultValue` if the [Map] stores `null`
+  /// values.
+  //
+  // Remove if implemented upstream:
+  // https://github.com/dart-lang/sdk/issues/37392
+  V get(K key, [V defaultValue]) =>
+      this.containsKey(key) ? this[key] : defaultValue;
 }
