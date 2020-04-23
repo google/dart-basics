@@ -3,17 +3,24 @@
 // license that can be found in the LICENSE file.
 
 /// Utility extension methods for the core [DateTime] class.
+///
+/// Note that *unlike* the behavior of [DateTime.operator ==], the provided
+/// comparison operators are time zone independent.
 extension DateTimeBasics on DateTime {
-  /// Returns true if [this] occurs strictly before [other].
+  /// Returns true if [this] occurs strictly before [other], independently of
+  /// time zones.
   bool operator <(DateTime other) => compareTo(other) < 0;
 
-  /// Returns true if [this] occurs strictly after [other].
+  /// Returns true if [this] occurs strictly after [other], independently of
+  /// time zones.
   bool operator >(DateTime other) => compareTo(other) > 0;
 
-  /// Returns true if [this] occurs on or before [other].
+  /// Returns true if [this] occurs on or before [other], independently of time
+  /// zones.
   bool operator <=(DateTime other) => compareTo(other) <= 0;
 
-  /// Returns true if [this] occurs on or after [other].
+  /// Returns true if [this] occurs on or after [other], independently of time
+  /// zones.
   bool operator >=(DateTime other) => compareTo(other) >= 0;
 
   /// Returns a new [DateTime] instance with [duration] added to [this].
