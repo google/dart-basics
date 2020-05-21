@@ -225,19 +225,14 @@ void main() {
     test('works on dynamic list with custom comparator', () {
       final items = [1, 'aaa', 2.0];
 
-      num getItemSize(dynamic item) {
-        if (item is num) return item;
-        if (item is String) return item.length;
-      }
-
       expect(
-        items.max((a, b) => getItemSize(a).compareTo(getItemSize(b))).value,
+        items.max((a, b) => _getItemSize(a).compareTo(_getItemSize(b))).value,
         equals('aaa'),
       );
 
       items.add(5.0);
       expect(
-        items.max((a, b) => getItemSize(a).compareTo(getItemSize(b))).value,
+        items.max((a, b) => _getItemSize(a).compareTo(_getItemSize(b))).value,
         equals(5.0),
       );
     });
@@ -312,19 +307,14 @@ void main() {
     test('works on dynamic list with custom comparator', () {
       final items = [1, 'aaa', 2.0];
 
-      num getItemSize(dynamic item) {
-        if (item is num) return item;
-        if (item is String) return item.length;
-      }
-
       expect(
-        items.min((a, b) => getItemSize(a).compareTo(getItemSize(b))).value,
+        items.min((a, b) => _getItemSize(a).compareTo(_getItemSize(b))).value,
         equals(1),
       );
 
       items.add(0.5);
       expect(
-        items.min((a, b) => getItemSize(a).compareTo(getItemSize(b))).value,
+        items.min((a, b) => _getItemSize(a).compareTo(_getItemSize(b))).value,
         equals(0.5),
       );
     });
@@ -442,15 +432,16 @@ void main() {
     test('works on dynamic list with custom addend', () {
       final items = [1, 'aaa', 2.0];
 
-      num getItemSize(dynamic item) {
-        if (item is num) return item;
-        if (item is String) return item.length;
-      }
-
-      expect(items.sum((a) => getItemSize(a)), equals(6));
+      expect(items.sum((a) => _getItemSize(a)), equals(6));
 
       items.add(0.5);
-      expect(items.sum((a) => getItemSize(a)), equals(6.5));
+      expect(items.sum((a) => _getItemSize(a)), equals(6.5));
     });
   });
+}
+
+num _getItemSize(dynamic item) {
+  if (item is num) return item;
+  if (item is String) return item.length;
+  throw UnimplementedError();
 }
