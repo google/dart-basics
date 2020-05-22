@@ -13,7 +13,7 @@ main() async {
 
   print('sum of numbers is: ${numbers.sum()}');
 
-  for (var i in 5.range) {
+  for (var _ in 5.range) {
     print('waiting 500 milliseconds...');
     await Future.delayed(500.milliseconds);
   }
