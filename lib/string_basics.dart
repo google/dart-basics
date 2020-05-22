@@ -2,8 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'src/slice_indices.dart';
 import 'package:quiver/strings.dart' as quiver_strings;
+import 'src/slice_indices.dart';
 
 /// Utility extension methods for the native [String] class.
 extension StringBasics on String {
