@@ -199,42 +199,32 @@ void main() {
       final strings = <String>['a', 'aaa', 'aa'];
 
       expect(
-        strings.max((a, b) => a.length.compareTo(b.length))!,
-        equals('aaa')
-      );
+          strings.max((a, b) => a.length.compareTo(b.length))!, equals('aaa'));
     });
 
     test('works on sets', () {
       final strings = <String>{'a', 'aaa', 'aa'};
 
       expect(
-        strings.max((a, b) => a.length.compareTo(b.length))!,
-        equals('aaa')
-      );
+          strings.max((a, b) => a.length.compareTo(b.length))!, equals('aaa'));
     });
 
     test('returns the first result when multiple elements match', () {
       final strings = <String>{'a', 'aaa', 'bbb'};
 
       expect(
-        strings.max((a, b) => a.length.compareTo(b.length))!,
-        equals('aaa')
-      );
+          strings.max((a, b) => a.length.compareTo(b.length))!, equals('aaa'));
     });
 
     test('works on dynamic list with custom comparator', () {
       final items = [1, 'aaa', 2.0];
 
-      expect(
-        items.max((a, b) => _getItemSize(a).compareTo(_getItemSize(b)))!,
-        equals('aaa')
-      );
+      expect(items.max((a, b) => _getItemSize(a).compareTo(_getItemSize(b)))!,
+          equals('aaa'));
 
       items.add(5.0);
-      expect(
-        items.max((a, b) => _getItemSize(a).compareTo(_getItemSize(b)))!,
-        equals(5.0)
-      );
+      expect(items.max((a, b) => _getItemSize(a).compareTo(_getItemSize(b)))!,
+          equals(5.0));
     });
 
     test('returns null for empty iterable', () {
@@ -243,10 +233,7 @@ void main() {
 
       expect(emptyInts.max(), isNull);
       expect(emptyInts.max((a, b) => a.compareTo(b)), isNull);
-      expect(
-        emptyStrings.max((a, b) => a.length.compareTo(b.length)),
-        isNull
-      );
+      expect(emptyStrings.max((a, b) => a.length.compareTo(b.length)), isNull);
     });
   });
 
@@ -280,43 +267,30 @@ void main() {
     test('works with custom comparator', () {
       final strings = <String>['a', 'aaa', 'aa'];
 
-      expect(
-        strings.min((a, b) => a.length.compareTo(b.length))!,
-        equals('a')
-      );
+      expect(strings.min((a, b) => a.length.compareTo(b.length))!, equals('a'));
     });
 
     test('works on sets', () {
       final strings = <String>{'a', 'aaa', 'aa'};
 
-      expect(
-        strings.min((a, b) => a.length.compareTo(b.length))!,
-        equals('a')
-      );
+      expect(strings.min((a, b) => a.length.compareTo(b.length))!, equals('a'));
     });
 
     test('returns the first result when multiple elements match', () {
       final strings = <String>{'a', 'aaa', 'b'};
 
-      expect(
-        strings.min((a, b) => a.length.compareTo(b.length))!,
-        equals('a')
-      );
+      expect(strings.min((a, b) => a.length.compareTo(b.length))!, equals('a'));
     });
 
     test('works on dynamic list with custom comparator', () {
       final items = [1, 'aaa', 2.0];
 
-      expect(
-        items.min((a, b) => _getItemSize(a).compareTo(_getItemSize(b)))!,
-        equals(1)
-      );
+      expect(items.min((a, b) => _getItemSize(a).compareTo(_getItemSize(b)))!,
+          equals(1));
 
       items.add(0.5);
-      expect(
-        items.min((a, b) => _getItemSize(a).compareTo(_getItemSize(b)))!,
-        equals(0.5)
-      );
+      expect(items.min((a, b) => _getItemSize(a).compareTo(_getItemSize(b)))!,
+          equals(0.5));
     });
 
     test('returns null for empty iterable', () {
@@ -325,10 +299,7 @@ void main() {
 
       expect(emptyInts.min(), isNull);
       expect(emptyInts.min((a, b) => a.compareTo(b)), isNull);
-      expect(
-        emptyStrings.min((a, b) => a.length.compareTo(b.length)),
-        isNull
-      );
+      expect(emptyStrings.min((a, b) => a.length.compareTo(b.length)), isNull);
     });
   });
 
