@@ -12,11 +12,11 @@ extension ObjectBasics on Object {
   ///
   /// Example:
   /// ```dart
-  /// int a;
+  /// int? a;
   /// a.isNull; // true
-  /// int b = 1;
+  /// int? b = 1;
   /// b.isNull; // false
-  /// var c;
+  /// var? c;
   /// c.isNull; // TypeError due to calling on runtime type `dynamic`.
   /// ```
   bool get isNull => this.runtimeType == Null;
@@ -25,11 +25,11 @@ extension ObjectBasics on Object {
   ///
   /// Example:
   /// ```dart
-  /// int a = 1;
+  /// int? a = 1;
   /// a.isNotNull; // true
-  /// int b;
+  /// int? b;
   /// b.isNotNull; // false
-  /// var c;
+  /// var? c;
   /// c.isNotNull; // TypeError due to calling on runtime type `dynamic`.
   /// ```
   bool get isNotNull => !isNull;

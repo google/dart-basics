@@ -160,14 +160,14 @@ extension StringBasics on String {
   /// 'word'.slice(start: 3, end: 1); // ''
   /// 'word'.slice(start: 1, end: 3, step: -1); // ''
   /// ```
-  String slice({int start, int end, int step = 1}) {
+  String slice({int? start, int? end, int step = 1}) {
     final indices = sliceIndices(start, end, step, this.length);
-    if (indices.isNotPresent) {
+    if (indices == null) {
       return '';
     }
 
-    final _start = indices.value.start;
-    final _end = indices.value.end;
+    final _start = indices!.value.start;
+    final _end = indices!.value.end;
     final stringBuffer = StringBuffer();
 
     if (step > 0) {

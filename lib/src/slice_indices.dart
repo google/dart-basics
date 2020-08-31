@@ -7,24 +7,19 @@ import 'package:quiver/core.dart';
 /// Logic shared between [ListBasics]`.slice` and [StringBasics]`.slice` for
 /// converting user input values to normalized indices.
 ///
-/// An absent return value corresponds to an empty slice.
-Optional<SliceIndices> sliceIndices(int start, int end, int step, int length) {
+/// A null return value corresponds to an empty slice.
+SliceIndices? sliceIndices(int? start, int? end, int step, int length) {
   if (step == 0) {
     throw ArgumentError('Slice step cannot be zero');
   }
 
-  int _start = start;
-  int _end = end;
-
   // Set default values for start and end.
-  if (_start == null) {
-    _start = step > 0 ? 0 : length - 1;
-  }
-  if (_end == null) {
-    // Because end is exclusive, it should be the first unreachable value in
-    // either step direction.
-    _end = step > 0 ? length : -(length + 1);
-  }
+  int _start = start != null ? start! : (step > 0 ? 0 : length - 1);
+  int _end = end != null
+      ? end!
+      // Because end is exclusive, it should be the first unreachable value in
+      // either step direction.
+      : (step > 0 ? length : -(length + 1));
 
   // Convert any end-counted indices (i.e. negative indices) into real indices.
   if (_start < 0) {
@@ -34,7 +29,7 @@ Optional<SliceIndices> sliceIndices(int start, int end, int step, int length) {
     _end = length + _end;
   }
 
-  // Return an absent value for any invalid index orderings.
+  // Return null for any invalid index orderings.
   //
   // Note that this must occur before index truncation, as truncation could
   // otherwise alter the ordering because start and end are not truncated to
@@ -42,7 +37,7 @@ Optional<SliceIndices> sliceIndices(int start, int end, int step, int length) {
   if ((_start == _end) ||
       (step > 0 && _start > _end) ||
       (step < 0 && _start < _end)) {
-    return Optional<SliceIndices>.absent();
+    return null;
   }
 
   // Truncate indices to allowed bounds.
@@ -57,7 +52,7 @@ Optional<SliceIndices> sliceIndices(int start, int end, int step, int length) {
     _end = length;
   }
 
-  return Optional.of(SliceIndices(_start, _end));
+  return SliceIndices(_start, _end);
 }
 
 class SliceIndices {

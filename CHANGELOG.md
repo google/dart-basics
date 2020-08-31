@@ -1,3 +1,7 @@
+## [0.5.0]
+
+Updated with null safety.
+
 ## [0.4.0]
 
 Added `MapBasics.get`.

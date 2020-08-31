@@ -56,14 +56,14 @@ extension ListBasics<E> on List<E> {
   /// [1, 2, 3, 4].slice(start: 3, end: 1); // []
   /// [1, 2, 3, 4].slice(start: 1, end: 3, step: -1); // []
   /// ```
-  List<E> slice({int start, int end, int step = 1}) {
+  List<E> slice({int? start, int? end, int step = 1}) {
     final indices = sliceIndices(start, end, step, this.length);
-    if (indices.isNotPresent) {
+    if (indices == null) {
       return <E>[];
     }
 
-    final _start = indices.value.start;
-    final _end = indices.value.end;
+    final _start = indices!.value.start;
+    final _end = indices!.value.end;
     final slice = <E>[];
 
     if (step > 0) {
