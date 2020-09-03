@@ -2,8 +2,6 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:quiver/core.dart';
-
 /// Logic shared between [ListBasics]`.slice` and [StringBasics]`.slice` for
 /// converting user input values to normalized indices.
 ///
@@ -14,9 +12,9 @@ SliceIndices? sliceIndices(int? start, int? end, int step, int length) {
   }
 
   // Set default values for start and end.
-  int _start = start != null ? start! : (step > 0 ? 0 : length - 1);
+  int _start = start != null ? start : (step > 0 ? 0 : length - 1);
   int _end = end != null
-      ? end!
+      ? end
       // Because end is exclusive, it should be the first unreachable value in
       // either step direction.
       : (step > 0 ? length : -(length + 1));

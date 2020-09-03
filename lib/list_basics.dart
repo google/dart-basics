@@ -62,8 +62,8 @@ extension ListBasics<E> on List<E> {
       return <E>[];
     }
 
-    final _start = indices!.value.start;
-    final _end = indices!.value.end;
+    final _start = indices.start;
+    final _end = indices.end;
     final slice = <E>[];
 
     if (step > 0) {

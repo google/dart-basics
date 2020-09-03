@@ -376,13 +376,16 @@ void main() {
   group('sum', () {
     test('returns sum on list of numbers', () {
       final nums = [1.5, 2, 3];
+      final ints = [2, 3, 4];
 
       expect(nums.sum(), 6.5);
       expect(nums.sum((n) => n * 2), 13);
+      expect(ints.sum((n) => n * 0.5), 4.5);
     });
 
     test('returns 0 on empty lists', () {
-      expect(<num>[].sum(), 0);
+      expect(<int>[].sum(), 0);
+      expect(<double>[].sum(), 0);
       expect(<num>[].sum((n) => n * 2), 0);
       expect(<String>[].sum((s) => s.length), 0);
       expect([].sum((n) => n * 2), 0);

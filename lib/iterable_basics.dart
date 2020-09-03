@@ -79,7 +79,8 @@ extension IterableBasics<E> on Iterable<E> {
 
     for (final element in otherElementCounts.keys) {
       final countInThis = thisElementCounts[element] ?? 0;
-      if (countInThis < otherElementCounts[element]) {
+      final countInOther = otherElementCounts[element] ?? 0;
+      if (countInThis < countInOther) {
         return false;
       }
     }
@@ -161,7 +162,7 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
   E? max([Comparator<E>? compare]) => this.isEmpty
       ? null
       : this.reduce(
-          compare == null ? math.max : _generateCustomMaxFunction<E>(compare!));
+          compare == null ? math.max : _generateCustomMaxFunction<E>(compare));
 
   /// Returns the least number in [this], or [null] if [this] is empty.
   ///
@@ -180,7 +181,7 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
   E? min([Comparator<E>? compare]) => this.isEmpty
       ? null
       : this.reduce(
-          compare == null ? math.min : _generateCustomMinFunction<E>(compare!));
+          compare == null ? math.min : _generateCustomMinFunction<E>(compare));
 
   /// Returns the sum of all the values in this iterable.
   ///
@@ -192,14 +193,14 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
   /// Example:
   /// ```dart
   /// [1, 2, 3].sum(); // 6.
-  /// [1, 2, 3].sum((i) => i * 3); // 18.
+  /// [2, 3, 4].sum((i) => i * 0.5); // 4.5.
   /// [].sum() // 0.
   /// ```
   num sum([num Function(E)? addend]) {
     if (this.isEmpty) return 0;
     return addend == null
-        ? this.reduce((a, b) => a + b)
-        : this.fold(0, (prev, element) => prev + addend!(element));
+        ? this.reduce((a, b) => (a + b) as E)
+        : this.fold(0, (prev, element) => prev + addend(element));
   }
 }
 

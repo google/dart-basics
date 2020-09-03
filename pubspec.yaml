@@ -12,7 +12,5 @@ authors:
 
 environment:
   sdk: ">=2.9.0-8.0 <3.0.0"
-dependencies:
-  quiver: ^2.1.2+1
 dev_dependencies:
   test: ^1.9.4
