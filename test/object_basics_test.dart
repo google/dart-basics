@@ -27,6 +27,7 @@ void main() {
       List? object5;
       Map? object7;
       Set? object9;
+      var object10;
 
       expect(object1.isNull, isTrue);
       expect(object2.isNull, isTrue);
@@ -35,6 +36,7 @@ void main() {
       expect(object5.isNull, isTrue);
       expect(object7.isNull, isTrue);
       expect(object9.isNull, isTrue);
+      expect(object10.isNull, isTrue);
     });
 
     test('returns false on initialized Object subclasses', () {
@@ -45,6 +47,7 @@ void main() {
       List? object5 = [1, 2, 3];
       Map? object7 = {1: 2, 3: 4, 5: 6};
       Set? object9 = {1, 2, 3};
+      var object10 = '';
 
       expect(object1.isNull, isFalse);
       expect(object2.isNull, isFalse);
@@ -53,6 +56,7 @@ void main() {
       expect(object5.isNull, isFalse);
       expect(object7.isNull, isFalse);
       expect(object9.isNull, isFalse);
+      expect(object10.isNull, isFalse);
     });
   });
 
@@ -77,6 +81,7 @@ void main() {
       List? object5;
       Map? object7;
       Set? object9;
+      var object10;
 
       expect(object1.isNotNull, isFalse);
       expect(object2.isNotNull, isFalse);
@@ -85,6 +90,7 @@ void main() {
       expect(object5.isNotNull, isFalse);
       expect(object7.isNotNull, isFalse);
       expect(object9.isNotNull, isFalse);
+      expect(object10.isNotNull, isFalse);
     });
 
     test('returns true on initialized Object subclasses', () {
@@ -95,6 +101,7 @@ void main() {
       List? object5 = [1, 2, 3];
       Map? object7 = {1: 2, 3: 4, 5: 6};
       Set? object9 = {1, 2, 3};
+      var object10 = '';
 
       expect(object1.isNotNull, isTrue);
       expect(object2.isNotNull, isTrue);
@@ -103,6 +110,7 @@ void main() {
       expect(object5.isNotNull, isTrue);
       expect(object7.isNotNull, isTrue);
       expect(object9.isNotNull, isTrue);
+      expect(object10.isNotNull, isTrue);
     });
   });
 }
