@@ -2,7 +2,6 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:quiver/strings.dart' as quiver_strings;
 import 'src/slice_indices.dart';
 
 /// Utility extension methods for the native [String] class.
@@ -23,11 +22,13 @@ extension StringBasics on String {
   int compareToIgnoringCase(String other) =>
       this.toLowerCase().compareTo(other.toLowerCase());
 
-  /// Syntactic sugar for calling Quiver [isBlank] as a getter.
-  bool get isBlank => quiver_strings.isBlank(this);
+  /// Returns `true` if [this] is empty or consists solely of whitespace
+  /// characters as defined by [String.trim].
+  bool get isBlank => this.trim().isEmpty;
 
-  /// Syntactic sugar for calling Quiver [isNotBlank] as a getter.
-  bool get isNotBlank => quiver_strings.isNotBlank(this);
+  /// Returns `true` if [this] is not empty and does not consist solely of
+  /// whitespace characters as defined by [String.trim].
+  bool get isNotBlank => this.trim().isNotEmpty;
 
   /// Returns a copy of [this] with [prefix] removed if it is present.
   ///
@@ -160,14 +161,14 @@ extension StringBasics on String {
   /// 'word'.slice(start: 3, end: 1); // ''
   /// 'word'.slice(start: 1, end: 3, step: -1); // ''
   /// ```
-  String slice({int start, int end, int step = 1}) {
+  String slice({int? start, int? end, int step = 1}) {
     final indices = sliceIndices(start, end, step, this.length);
-    if (indices.isNotPresent) {
+    if (indices == null) {
       return '';
     }
 
-    final _start = indices.value.start;
-    final _end = indices.value.end;
+    final _start = indices.start;
+    final _end = indices.end;
     final stringBuffer = StringBuffer();
 
     if (step > 0) {

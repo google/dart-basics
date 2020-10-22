@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 
 import 'dart:math' as math;
-import 'package:quiver/core.dart';
 
 /// Utility extension methods for the native [Iterable] class.
 extension IterableBasics<E> on Iterable<E> {
@@ -80,55 +79,54 @@ extension IterableBasics<E> on Iterable<E> {
 
     for (final element in otherElementCounts.keys) {
       final countInThis = thisElementCounts[element] ?? 0;
-      if (countInThis < otherElementCounts[element]) {
+      final countInOther = otherElementCounts[element] ?? 0;
+      if (countInThis < countInOther) {
         return false;
       }
     }
     return true;
   }
 
-  /// Returns an [Optional] with the greatest element of [this], as ordered by
-  /// [compare], or [Optional.absent()] if [this] is empty.
+  /// Returns the greatest element of [this] as ordered by [compare], or [null]
+  /// if [this] is empty.
   ///
   /// Example:
   /// ```dart
   /// ['a', 'aaa', 'aa']
   ///   .max((a, b) => a.length.compareTo(b.length)).value; // 'aaa'
   /// ```
-  Optional<E> max(Comparator<E> compare) => this.isEmpty
-      ? Optional.absent()
-      : Optional.of(this.reduce(_generateCustomMaxFunction<E>(compare)));
+  E? max(Comparator<E> compare) =>
+      this.isEmpty ? null : this.reduce(_generateCustomMaxFunction<E>(compare));
 
-  /// Returns an [Optional] with the smallest element of [this], as ordered by
-  /// [compare], or [Optional.absent()] if [this] is empty.
+  /// Returns the smallest element of [this] as ordered by [compare], or [null]
+  /// if [this] is empty.
   ///
   /// Example:
   /// ```dart
   /// ['a', 'aaa', 'aa']
   ///   .min((a, b) => a.length.compareTo(b.length)).value; // 'a'
   /// ```
-  Optional<E> min(Comparator<E> compare) => this.isEmpty
-      ? Optional.absent()
-      : Optional.of(this.reduce(_generateCustomMinFunction<E>(compare)));
+  E? min(Comparator<E> compare) =>
+      this.isEmpty ? null : this.reduce(_generateCustomMinFunction<E>(compare));
 
-  /// Returns an [Optional] with the element of [this] with the greatest value
-  /// for [sortyKey], or [Optional.absent()] if [this] is empty.
+  /// Returns the element of [this] with the greatest value for [sortKey], or
+  /// [null] if [this] is empty.
   ///
   /// Example:
   /// ```dart
   /// ['a', 'aaa', 'aa'].maxBy((e) => e.length).value; // 'aaa'
   /// ```
-  Optional<E> maxBy(Comparable Function(E) sortKey) =>
+  E? maxBy(Comparable Function(E) sortKey) =>
       this.max((a, b) => sortKey(a).compareTo(sortKey(b)));
 
-  /// Returns an [Optional] with the element of [this] with the least value for
-  /// [sortyKey], or [Optional.absent()] if [this] is empty.
+  /// Returns the element of [this] with the least value for [sortKey], or
+  /// [null] if [this] is empty.
   ///
   /// Example:
   /// ```dart
   /// ['a', 'aaa', 'aa'].minBy((e) => e.length).value; // 'a'
   /// ```
-  Optional<E> minBy(Comparable Function(E) sortKey) =>
+  E? minBy(Comparable Function(E) sortKey) =>
       this.min((a, b) => sortKey(a).compareTo(sortKey(b)));
 
   /// Returns the sum of all the values in this iterable, as defined by
@@ -140,16 +138,14 @@ extension IterableBasics<E> on Iterable<E> {
   /// ```dart
   /// ['a', 'aa', 'aaa'].sum((s) => s.length); // 6.
   /// ```
-  num sum(num Function(E) addend) {
-    if (this.isEmpty) return 0;
-    return this.fold(0, (prev, element) => prev + addend(element));
-  }
+  num sum(num Function(E) addend) => this.isEmpty
+      ? 0
+      : this.fold(0, (prev, element) => prev + addend(element));
 }
 
 /// Utility extension methods for [Iterable]s containing [num]s.
 extension NumIterableBasics<E extends num> on Iterable<E> {
-  /// Returns an [Optional] with the greatest number in [this], or
-  /// [Optional.absent()] if [this] is empty.
+  /// Returns the greatest number in [this], or [null] if [this] is empty.
   ///
   /// Example:
   /// ```dart
@@ -163,15 +159,12 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
   /// [-47, 10, 2].max((a, b) =>
   ///     a.toString().length.compareTo(b.toString().length)).value; // -47
   /// ```
-  Optional<E> max([Comparator<E> compare]) {
-    if (this.isEmpty) return Optional.absent();
-    return Optional.of(this.reduce(
-      compare == null ? math.max : _generateCustomMaxFunction<E>(compare),
-    ));
-  }
+  E? max([Comparator<E>? compare]) => this.isEmpty
+      ? null
+      : this.reduce(
+          compare == null ? math.max : _generateCustomMaxFunction<E>(compare));
 
-  /// Returns an [Optional] with the least number in [this], or
-  /// [Optional.absent()] if [this] is empty.
+  /// Returns the least number in [this], or [null] if [this] is empty.
   ///
   /// Example:
   /// ```dart
@@ -185,12 +178,10 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
   /// [-100, -200, 5].min((a, b) =>
   ///     a.toString().length.compareTo(b.toString().length)).value; // 5
   /// ```
-  Optional<E> min([Comparator<E> compare]) {
-    if (this.isEmpty) return Optional.absent();
-    return Optional.of(this.reduce(
-      compare == null ? math.min : _generateCustomMinFunction<E>(compare),
-    ));
-  }
+  E? min([Comparator<E>? compare]) => this.isEmpty
+      ? null
+      : this.reduce(
+          compare == null ? math.min : _generateCustomMinFunction<E>(compare));
 
   /// Returns the sum of all the values in this iterable.
   ///
@@ -202,13 +193,13 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
   /// Example:
   /// ```dart
   /// [1, 2, 3].sum(); // 6.
-  /// [1, 2, 3].sum((i) => i * 3); // 18.
+  /// [2, 3, 4].sum((i) => i * 0.5); // 4.5.
   /// [].sum() // 0.
   /// ```
-  num sum([num Function(E) addend]) {
+  num sum([num Function(E)? addend]) {
     if (this.isEmpty) return 0;
     return addend == null
-        ? this.reduce((a, b) => a + b)
+        ? this.reduce((a, b) => (a + b) as E)
         : this.fold(0, (prev, element) => prev + addend(element));
   }
 }

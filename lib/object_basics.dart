@@ -3,21 +3,15 @@
 // license that can be found in the LICENSE file.
 
 /// Utility extension methods for the native [Object] class.
-///
-/// NOTE: These extension methods will _not_ work on objects with a runtime type
-/// of `dynamic`. This is a consequence of the implementation of static
-/// extension methods in dart.
-extension ObjectBasics on Object {
+extension ObjectBasics on Object? {
   /// Returns `true` if [this] is `null`.
   ///
   /// Example:
   /// ```dart
-  /// int a;
+  /// int? a;
   /// a.isNull; // true
-  /// int b = 1;
+  /// int? b = 1;
   /// b.isNull; // false
-  /// var c;
-  /// c.isNull; // TypeError due to calling on runtime type `dynamic`.
   /// ```
   bool get isNull => this.runtimeType == Null;
 
@@ -25,12 +19,10 @@ extension ObjectBasics on Object {
   ///
   /// Example:
   /// ```dart
-  /// int a = 1;
+  /// int? a = 1;
   /// a.isNotNull; // true
-  /// int b;
+  /// int? b;
   /// b.isNotNull; // false
-  /// var c;
-  /// c.isNotNull; // TypeError due to calling on runtime type `dynamic`.
   /// ```
   bool get isNotNull => !isNull;
 }

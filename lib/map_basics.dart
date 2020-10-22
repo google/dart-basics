@@ -39,6 +39,6 @@ extension MapBasics<K, V> on Map<K, V> {
   //
   // Remove if implemented upstream:
   // https://github.com/dart-lang/sdk/issues/37392
-  V get(K key, [V defaultValue]) =>
+  V? get(K key, {V? defaultValue}) =>
       this.containsKey(key) ? this[key] : defaultValue;
 }

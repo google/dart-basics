@@ -37,17 +37,17 @@ void main() {
   group('get', () {
     test('returns the value for a found key', () {
       final map = {'a': 1, 'b': 2, 'c': null};
-      expect(map.get('a'), 1);
-      expect(map.get('a', 0), 1);
+      expect(map.get('a')!, 1);
+      expect(map.get('a', defaultValue: 0)!, 1);
 
       expect(map.get('c'), null);
-      expect(map.get('c', 0), null);
+      expect(map.get('c', defaultValue: 0), null);
     });
 
     test('returns the default value if no key found', () {
       final map = {'a': 1, 'b': 2, 'c': null};
       expect(map.get('d'), null);
-      expect(map.get('d', 0), 0);
+      expect(map.get('d', defaultValue: 0)!, 0);
     });
   });
 }
