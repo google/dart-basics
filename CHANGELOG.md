@@ -1,3 +1,7 @@
+## [0.5.1]
+
+Update docs.
+
 ## [0.5.0]
 
 Updated with null safety.
