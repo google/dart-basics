@@ -3,35 +3,44 @@
 // license that can be found in the LICENSE file.
 
 /// Utility extension methods for the core [DateTime] class.
-///
-/// Note that *unlike* the behavior of [DateTime.operator ==], the provided
-/// comparison operators are time zone independent.
 extension DateTimeBasics on DateTime {
-  /// Returns true if [this] occurs strictly before [other], independently of
-  /// time zones.
+  /// Returns true if [this] occurs strictly before [other], accounting for time
+  /// zones.
+  ///
+  /// Delegates to [DateTime.compareTo] and therefore obeys the contract of that
+  /// method.
   bool operator <(DateTime other) => compareTo(other) < 0;
 
-  /// Returns true if [this] occurs strictly after [other], independently of
-  /// time zones.
+  /// Returns true if [this] occurs strictly after [other], accounting for time
+  /// zones.
+  ///
+  /// Delegates to [DateTime.compareTo] and therefore obeys the contract of that
+  /// method.
   bool operator >(DateTime other) => compareTo(other) > 0;
 
-  /// Returns true if [this] occurs on or before [other], independently of time
+  /// Returns true if [this] occurs on or before [other], accounting for time
   /// zones.
+  ///
+  /// Delegates to [DateTime.compareTo] and therefore obeys the contract of that
+  /// method.
   bool operator <=(DateTime other) => compareTo(other) <= 0;
 
-  /// Returns true if [this] occurs on or after [other], independently of time
+  /// Returns true if [this] occurs on or after [other], accounting for time
   /// zones.
+  ///
+  /// Delegates to [DateTime.compareTo] and therefore obeys the contract of that
+  /// method.
   bool operator >=(DateTime other) => compareTo(other) >= 0;
 
   /// Returns a new [DateTime] instance with [duration] added to [this].
   ///
-  /// See [DateTime.add].
+  /// Convenience alias for [DateTime.add].
   DateTime operator +(Duration duration) => this.add(duration);
 
   /// Returns the [Duration] between [this] and [other].
   ///
   /// The returned [Duration] will be negative if [other] occurs after [this].
   ///
-  /// See [DateTime.difference].
+  /// Convenience alias for [DateTime.difference].
   Duration operator -(DateTime other) => this.difference(other);
 }
