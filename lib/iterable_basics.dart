@@ -141,6 +141,10 @@ extension IterableBasics<E> on Iterable<E> {
   num sum(num Function(E) addend) => this.isEmpty
       ? 0
       : this.fold(0, (prev, element) => prev + addend(element));
+
+  /// Returns a random element of [this], or [null] if [this] is empty.
+  E? getRandom() =>
+      this.isEmpty ? null : this.elementAt(math.Random().nextInt(this.length));
 }
 
 /// Utility extension methods for [Iterable]s containing [num]s.

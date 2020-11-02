@@ -223,6 +223,18 @@ void main() {
     });
   });
 
+  group('takeRandom', () {
+    test('returns null for an empty set', () {
+      expect(<String>{}.takeRandom(), isNull);
+    });
+
+    test('removes the only element of a set of length 1', () {
+      final values = {'a'};
+      expect(values.takeRandom(), 'a');
+      expect(values, isEmpty);
+    });
+  });
+
   group('classify', () {
     test('groups values by provided classifier', () {
       final values = {'aaa', 'bbb', 'cc', 'a', 'bb'};

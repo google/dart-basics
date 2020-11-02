@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:math' as math;
+
 /// Utility extension methods for the native [Set] class.
 extension SetBasics<E> on Set<E> {
   /// Returns `true` if [this] and [other] contain exactly the same elements.
@@ -85,6 +87,16 @@ extension SetBasics<E> on Set<E> {
   /// ```
   bool isStrictSupersetOf(Set<Object> other) =>
       this.length > other.length && this.containsAll(other);
+
+  /// Removes a random element of [this] and returns it.
+  ///
+  /// Returns [null] if [this] is empty.
+  E? takeRandom() {
+    if (this.isEmpty) return null;
+    final element = this.elementAt(math.Random().nextInt(this.length));
+    this.remove(element);
+    return element;
+  }
 
   /// Returns a map grouping all elements of [this] with the same value for
   /// [classifier].

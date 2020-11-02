@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:math' as math;
+
 import 'src/slice_indices.dart';
 
 /// Utility extension methods for the native [List] class.
@@ -106,4 +108,10 @@ extension ListBasics<E> on List<E> {
   List<E> sortedCopyBy(Comparable Function(E) sortKey) {
     return List<E>.of(this)..sortBy(sortKey);
   }
+
+  /// Removes a random element of [this] and returns it.
+  ///
+  /// Returns [null] if [this] is empty.
+  E? takeRandom() =>
+      this.isEmpty ? null : this.removeAt(math.Random().nextInt(this.length));
 }
