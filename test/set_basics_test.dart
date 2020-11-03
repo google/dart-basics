@@ -223,6 +223,24 @@ void main() {
     });
   });
 
+  group('takeRandom', () {
+    test('returns null for an empty set', () {
+      expect(<String>{}.takeRandom(), isNull);
+    });
+
+    test('removes the only element of a set of length 1', () {
+      final values = {'a'};
+      expect(values.takeRandom(), 'a');
+      expect(values, isEmpty);
+    });
+
+    test('removes a fixed element when a seed is provided', () {
+      final values = {'a', 'b', 'c', 'd'};
+      expect(values.takeRandom(seed: 45), 'c');
+      expect(values, {'a', 'b', 'd'});
+    });
+  });
+
   group('classify', () {
     test('groups values by provided classifier', () {
       final values = {'aaa', 'bbb', 'cc', 'a', 'bb'};

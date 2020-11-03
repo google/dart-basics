@@ -412,6 +412,20 @@ void main() {
       expect(items.sum((a) => _getItemSize(a)), equals(6.5));
     });
   });
+
+  group('getRandom', () {
+    test('returns null for an empty iterable', () {
+      expect([].getRandom(), isNull);
+    });
+
+    test('returns the only value of an iterable of length 1', () {
+      expect(['a'].getRandom(), 'a');
+    });
+
+    test('returns a fixed element when a seed is provided', () {
+      expect(['a', 'b', 'c', 'd'].getRandom(seed: 45), 'c');
+    });
+  });
 }
 
 num _getItemSize(dynamic item) {
