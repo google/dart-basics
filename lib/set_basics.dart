@@ -91,9 +91,9 @@ extension SetBasics<E> on Set<E> {
   /// Removes a random element of [this] and returns it.
   ///
   /// Returns [null] if [this] is empty.
-  E? takeRandom() {
+  E? takeRandom({int? seed}) {
     if (this.isEmpty) return null;
-    final element = this.elementAt(math.Random().nextInt(this.length));
+    final element = this.elementAt(math.Random(seed).nextInt(this.length));
     this.remove(element);
     return element;
   }

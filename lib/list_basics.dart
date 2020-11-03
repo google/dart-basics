@@ -112,6 +112,7 @@ extension ListBasics<E> on List<E> {
   /// Removes a random element of [this] and returns it.
   ///
   /// Returns [null] if [this] is empty.
-  E? takeRandom() =>
-      this.isEmpty ? null : this.removeAt(math.Random().nextInt(this.length));
+  E? takeRandom({int? seed}) => this.isEmpty
+      ? null
+      : this.removeAt(math.Random(seed).nextInt(this.length));
 }

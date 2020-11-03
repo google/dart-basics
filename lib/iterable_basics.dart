@@ -143,8 +143,9 @@ extension IterableBasics<E> on Iterable<E> {
       : this.fold(0, (prev, element) => prev + addend(element));
 
   /// Returns a random element of [this], or [null] if [this] is empty.
-  E? getRandom() =>
-      this.isEmpty ? null : this.elementAt(math.Random().nextInt(this.length));
+  E? getRandom({int? seed}) => this.isEmpty
+      ? null
+      : this.elementAt(math.Random(seed).nextInt(this.length));
 }
 
 /// Utility extension methods for [Iterable]s containing [num]s.

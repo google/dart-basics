@@ -233,6 +233,12 @@ void main() {
       expect(values.takeRandom(), 'a');
       expect(values, isEmpty);
     });
+
+    test('removes a fixed element when a seed is provided', () {
+      final values = {'a', 'b', 'c', 'd'};
+      expect(values.takeRandom(seed: 45), 'c');
+      expect(values, {'a', 'b', 'd'});
+    });
   });
 
   group('classify', () {

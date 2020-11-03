@@ -421,6 +421,10 @@ void main() {
     test('returns the only value of an iterable of length 1', () {
       expect(['a'].getRandom(), 'a');
     });
+
+    test('returns a fixed element when a seed is provided', () {
+      expect(['a', 'b', 'c', 'd'].getRandom(seed: 45), 'c');
+    });
   });
 }
 

@@ -222,5 +222,11 @@ void main() {
       expect(list.takeRandom(), 'a');
       expect(list, isEmpty);
     });
+
+    test('removes a fixed element when a seed is provided', () {
+      final list = ['a', 'b', 'c', 'd'];
+      expect(list.takeRandom(seed: 45), 'c');
+      expect(list, ['a', 'b', 'd']);
+    });
   });
 }
