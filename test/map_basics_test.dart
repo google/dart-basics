@@ -6,6 +6,37 @@ import 'package:basics/basics.dart';
 import 'package:test/test.dart';
 
 void main() {
+  group('get', () {
+    test('returns the value for a found key', () {
+      final map = {'a': 1, 'b': 2, 'c': null};
+      expect(map.get('a'), 1);
+      expect(map.get('a', defaultValue: 0), 1);
+
+      expect(map.get('c'), null);
+      expect(map.get('c', defaultValue: 0), null);
+    });
+
+    test('returns the default value if no key found', () {
+      final map = {'a': 1, 'b': 2, 'c': null};
+      expect(map.get('d'), null);
+      expect(map.get('d', defaultValue: 0), 0);
+    });
+  });
+
+  group('whereKey', () {
+    test('returns all entries with key satisfying test', () {
+      final map = {'a': 1, 'bb': 2, 'ccc': 3};
+      expect(map.whereKey((key) => key.length > 1), {'bb': 2, 'ccc': 3});
+    });
+  });
+
+  group('whereValue', () {
+    test('returns all entries with value satisfying test', () {
+      final map = {'a': 1, 'b': 2, 'c': 3};
+      expect(map.whereValue((value) => value > 1), {'b': 2, 'c': 3});
+    });
+  });
+
   group('invert', () {
     test('inverts each entry', () {
       final map = {'a': 1, 'b': 2, 'c': 3};
@@ -31,23 +62,6 @@ void main() {
     test('returns an empty map when called on an empty map', () {
       final map = {};
       expect(map.invert(), {});
-    });
-  });
-
-  group('get', () {
-    test('returns the value for a found key', () {
-      final map = {'a': 1, 'b': 2, 'c': null};
-      expect(map.get('a')!, 1);
-      expect(map.get('a', defaultValue: 0)!, 1);
-
-      expect(map.get('c'), null);
-      expect(map.get('c', defaultValue: 0), null);
-    });
-
-    test('returns the default value if no key found', () {
-      final map = {'a': 1, 'b': 2, 'c': null};
-      expect(map.get('d'), null);
-      expect(map.get('d', defaultValue: 0)!, 0);
     });
   });
 }
