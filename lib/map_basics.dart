@@ -16,7 +16,7 @@ extension MapBasics<K, V> on Map<K, V> {
   V? get(K key, {V? defaultValue}) =>
       this.containsKey(key) ? this[key] : defaultValue;
 
-  /// Returns a new Map containing all the entries of [this] for which the key
+  /// Returns a new [Map] containing all the entries of [this] for which the key
   /// satisfies [test].
   ///
   /// Example:
@@ -28,8 +28,8 @@ extension MapBasics<K, V> on Map<K, V> {
       // Entries do not need to be cloned because they are const.
       Map.fromEntries(this.entries.where((entry) => test(entry.key)));
 
-  /// Returns a new Map containing all the entries of [this] for which the value
-  /// satisfies [test].
+  /// Returns a new [Map] containing all the entries of [this] for which the
+  /// value satisfies [test].
   ///
   /// Example:
   /// ```dart
@@ -40,8 +40,8 @@ extension MapBasics<K, V> on Map<K, V> {
       // Entries do not need to be cloned because they are const.
       Map.fromEntries(this.entries.where((entry) => test(entry.value)));
 
-  /// Returns a new Map where each entry is inverted, with the key becoming the
-  /// value and the value becoming the key.
+  /// Returns a new [Map] where each entry is inverted, with the key becoming
+  /// the value and the value becoming the key.
   ///
   /// Example:
   /// ```dart
