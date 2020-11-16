@@ -11,6 +11,6 @@ authors:
   - garciaz@google.com <garciaz@google.com>
 
 environment:
-  sdk: ">=2.10.0-0 <2.11.0"
+  sdk: ">=2.12.0-0 <3.0.0"
 dev_dependencies:
   test: ^1.16.0-nullsafety.5
