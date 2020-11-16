@@ -27,7 +27,7 @@ void main() {
       List? object5;
       Map? object7;
       Set? object9;
-      var object10;
+      Object? object10;
 
       expect(object1.isNull, isTrue);
       expect(object2.isNull, isTrue);
@@ -81,7 +81,7 @@ void main() {
       List? object5;
       Map? object7;
       Set? object9;
-      var object10;
+      Object? object10;
 
       expect(object1.isNotNull, isFalse);
       expect(object2.isNotNull, isFalse);
