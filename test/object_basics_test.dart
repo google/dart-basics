@@ -27,8 +27,6 @@ void main() {
       List? object5;
       Map? object7;
       Set? object9;
-      // The following line should work if written as `var object10;`,
-      // but currently it raises an error.
       Object? object10;
 
       expect(object1.isNull, isTrue);
@@ -83,8 +81,6 @@ void main() {
       List? object5;
       Map? object7;
       Set? object9;
-      // The following line should work if written as `var object10;`,
-      // but currently it raises an error.
       Object? object10;
 
       expect(object1.isNotNull, isFalse);
