@@ -1,3 +1,7 @@
+## [0.6.0]
+
+Remove object basics (`isNull` and `isNotNull`).
+
 ## [0.5.1]
 
 Update docs.
