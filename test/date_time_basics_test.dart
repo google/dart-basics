@@ -11,7 +11,7 @@ void main() {
 
   final localTime = utcTime.toLocal();
 
-  group('Comparisons:', () {
+  group('comparison operators:', () {
     test('DateTime < DateTime works', () {
       expect(utcTime < utcTime, false);
       expect(utcTime < utcTimeAfter, true);
@@ -49,16 +49,40 @@ void main() {
     });
   });
 
-  test('DateTime + Duration works', () {
-    expect(utcTime + Duration(seconds: 1), utcTimeAfter);
-    expect((localTime + Duration(seconds: 1)).toUtc(), utcTimeAfter);
+  group('arithmetic operators:', () {
+    test('DateTime + Duration works', () {
+      expect(utcTime + Duration(seconds: 1), utcTimeAfter);
+      expect((localTime + Duration(seconds: 1)).toUtc(), utcTimeAfter);
 
-    expect(utcTimeAfter + -Duration(seconds: 1), utcTime);
+      expect(utcTimeAfter + -Duration(seconds: 1), utcTime);
+    });
+
+    test('DateTime - DateTime works', () {
+      expect(utcTimeAfter - utcTime, Duration(seconds: 1));
+      expect(utcTime - utcTimeAfter, -Duration(seconds: 1));
+      expect(utcTimeAfter - localTime, Duration(seconds: 1));
+    });
   });
 
-  test('DateTime - DateTime works', () {
-    expect(utcTimeAfter - utcTime, Duration(seconds: 1));
-    expect(utcTime - utcTimeAfter, -Duration(seconds: 1));
-    expect(utcTimeAfter - localTime, Duration(seconds: 1));
+  group('isAtOrBefore', () {
+    test('works as expected', () {
+      expect(utcTime.isAtOrBefore(utcTime), true);
+      expect(utcTime.isAtOrBefore(utcTimeAfter), true);
+      expect(utcTimeAfter.isAtOrBefore(utcTime), false);
+
+      expect(localTime.isAtOrBefore(utcTime), true);
+      expect(localTime.isAtOrBefore(utcTimeAfter), true);
+    });
+  });
+
+  group('isAtOrAfter', () {
+    test('works as expected', () {
+      expect(utcTime.isAtOrAfter(utcTime), true);
+      expect(utcTime.isAtOrAfter(utcTimeAfter), false);
+      expect(utcTimeAfter.isAtOrAfter(utcTime), true);
+
+      expect(localTime.isAtOrAfter(utcTime), true);
+      expect(utcTimeAfter.isAtOrAfter(localTime), true);
+    });
   });
 }
