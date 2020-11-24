@@ -4,12 +4,9 @@ on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     container:
-      image:  google/dart:2.12.0
-
+      image: google/dart:2.12-dev
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
