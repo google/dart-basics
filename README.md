@@ -22,18 +22,21 @@ import 'package:basics/basics.dart';
 Then use the methods directly on objects in your dart code.
 
 ```dart
-List<int> numbers;
+import 'package:basics/basics.dart';
 
-if (numbers.isNull) {
-  print('Numbers is uninitialized');
-}
+main() async {
+  const numbers = <int>[2, 4, 8];
 
-for (var i in 1.to(10)) {
-  if (i.isEven) numbers.add(i);
-}
+  if (numbers.all((n) => n.isEven)) {
+    print('All numbers are even.');
+  }
 
-if (numbers.isNotNull && numbers.all(isEven)) {
-  print('All numbers are even');
+  print('sum of numbers is: ${numbers.sum()}');
+
+  for (var _ in 5.range) {
+    print('waiting 500 milliseconds...');
+    await Future.delayed(500.milliseconds);
+  }
 }
 ```
 

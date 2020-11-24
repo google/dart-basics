@@ -4,12 +4,10 @@ on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     container:
-      image:  google/dart:latest
-
+      # TODO(johnsonmh): change this to google/dart:latest once latest supports NNBD.
+      image: google/dart:2.12-dev
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies

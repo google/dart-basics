@@ -7,6 +7,5 @@ export 'int_basics.dart';
 export 'iterable_basics.dart';
 export 'list_basics.dart';
 export 'map_basics.dart';
-export 'object_basics.dart';
 export 'set_basics.dart';
 export 'string_basics.dart';
