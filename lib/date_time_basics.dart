@@ -8,24 +8,52 @@ extension DateTimeBasics on DateTime {
   /// zones.
   ///
   /// Alias for [DateTime.isBefore].
+  ///
+  /// Note that attempting to use this operator with [DateTime.==] will likely
+  /// give undesirable results. This operator compares moments (i.e. with time
+  /// zone taken into account), while [DateTime.==] compares field values (i.e.
+  /// two [DateTime]s representing the same moment in different time zones will
+  /// be treated as not equal). To check moment equality with time zone taken
+  /// into account, use [DateTime.isAtSameMomentAs] rather than [DateTime.==].
   bool operator <(DateTime other) => isBefore(other);
 
   /// Returns true if [this] occurs strictly after [other], accounting for time
   /// zones.
   ///
   /// Alias for [DateTime.isAfter].
+  ///
+  /// Note that attempting to use this operator with [DateTime.==] will likely
+  /// give undesirable results. This operator compares moments (i.e. with time
+  /// zone taken into account), while [DateTime.==] compares field values (i.e.
+  /// two [DateTime]s representing the same moment in different time zones will
+  /// be treated as not equal). To check moment equality with time zone taken
+  /// into account, use [DateTime.isAtSameMomentAs] rather than [DateTime.==].
   bool operator >(DateTime other) => isAfter(other);
 
   /// Returns true if [this] occurs at or before [other], accounting for time
   /// zones.
   ///
   /// Alias for [isAtOrBefore].
+  ///
+  /// Note that attempting to use this operator with [DateTime.==] will likely
+  /// give undesirable results. This operator compares moments (i.e. with time
+  /// zone taken into account), while [DateTime.==] compares field values (i.e.
+  /// two [DateTime]s representing the same moment in different time zones will
+  /// be treated as not equal). To check moment equality with time zone taken
+  /// into account, use [DateTime.isAtSameMomentAs] rather than [DateTime.==].
   bool operator <=(DateTime other) => isAtOrBefore(other);
 
   /// Returns true if [this] occurs at or after [other], accounting for time
   /// zones.
   ///
   /// Alias for [isAtOrAfter].
+  ///
+  /// Note that attempting to use this operator with [DateTime.==] will likely
+  /// give undesirable results. This operator compares moments (i.e. with time
+  /// zone taken into account), while [DateTime.==] compares field values (i.e.
+  /// two [DateTime]s representing the same moment in different time zones will
+  /// be treated as not equal). To check moment equality with time zone taken
+  /// into account, use [DateTime.isAtSameMomentAs] rather than [DateTime.==].
   bool operator >=(DateTime other) => isAtOrAfter(other);
 
   /// Returns a new [DateTime] instance with [duration] added to [this].
