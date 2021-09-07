@@ -54,4 +54,48 @@ extension DateTimeBasics on DateTime {
   /// Delegates to [DateTime]'s built-in comparison methods and therefore obeys
   /// the same contract.
   bool isAtOrAfter(DateTime other) => isAtSameMomentAs(other) || isAfter(other);
+
+  /// Copies a [DateTime], overriding specified values.
+  DateTime copyWith({
+    int? year,
+    int? month,
+    int? day,
+    int? hour,
+    int? minute,
+    int? second,
+    int? millisecond,
+    int? microsecond,
+  }) {
+    return this.isUtc
+        ? DateTime.utc(
+            year ?? this.year,
+            month ?? this.month,
+            day ?? this.day,
+            hour ?? this.hour,
+            minute ?? this.minute,
+            second ?? this.second,
+            millisecond ?? this.millisecond,
+            microsecond ?? this.microsecond,
+          )
+        : DateTime(
+            year ?? this.year,
+            month ?? this.month,
+            day ?? this.day,
+            hour ?? this.hour,
+            minute ?? this.minute,
+            second ?? this.second,
+            millisecond ?? this.millisecond,
+            microsecond ?? this.microsecond,
+          );
+  }
+
+  /// Adds a specified number of days to this [DateTime].
+  ///
+  /// Unlike `DateTime.add(Duration(days: numberOfDays))`, this adds calendar
+  /// days and not 24-hour increments.  When possible, it therefore leaves the
+  /// time of day unchanged if a DST change would occur during the time
+  /// interval. (The returned time can still be different from the original if
+  /// it's valid for the returned date.)
+  DateTime addCalendarDays(int numberOfDays) =>
+      copyWith(day: day + numberOfDays);
 }
