@@ -98,4 +98,30 @@ extension DateTimeBasics on DateTime {
   /// it's valid for the returned date.)
   DateTime addCalendarDays(int numberOfDays) =>
       copyWith(day: day + numberOfDays);
+
+  /// Returns the number of calendar days to the specified date.
+  ///
+  /// Returns a negative value if the specified date is in the past.  Ignores
+  /// the time of day.
+  ///
+  /// Example:
+  /// ```
+  /// DateTime(2020, 12, 31).calendarDaysTo(2021, 1, 1); // 1
+  /// DateTime(2020, 12, 31, 23, 59).calendarDaysTo(2021, 1, 1); // 1
+  /// ```
+  ///
+  /// This function intentionally does not take a [DateTime] argument to:
+  /// * More clearly indicate that it does not take time of day into account.
+  /// * Avoid potential problems if one [DateTime] is in UTC and the other is
+  ///   not.
+  int calendarDaysTo(int year, int month, int day) {
+    // Discard the time of day, and perform all calculations in UTC so that
+    // Daylight Saving Time adjustments are not a factor.
+    //
+    // Note that this intentionally isn't the same as `toUtc()`; we instead
+    // want to treat this `DateTime` object *as* a UTC `DateTime`.
+    final startDay = DateTime.utc(this.year, this.month, this.day);
+    final endDay = DateTime.utc(year, month, day);
+    return (endDay - startDay).inDays;
+  }
 }

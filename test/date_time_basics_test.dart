@@ -127,23 +127,36 @@ void main() {
     });
   });
 
+  test('calendarDayTo works', () {
+    expect(DateTime(2020, 12, 31).calendarDaysTo(2021, 1, 1), 1);
+    expect(DateTime(2020, 12, 31, 23, 59).calendarDaysTo(2021, 1, 1), 1);
+    expect(DateTime(2021, 1, 1).calendarDaysTo(2020, 12, 31), -1);
+
+    expect(DateTime(2021, 3, 1).calendarDaysTo(2021, 5, 1), 31 + 30);
+    expect(DateTime(2021, 10, 1).calendarDaysTo(2021, 12, 1), 31 + 30);
+
+    expect(DateTime.utc(2020, 12, 31).calendarDaysTo(2021, 1, 1), 1);
+    expect(DateTime.utc(2020, 12, 31, 23, 59).calendarDaysTo(2021, 1, 1), 1);
+    expect(DateTime.utc(2021, 1, 1).calendarDaysTo(2020, 12, 31), -1);
+
+    expect(DateTime.utc(2021, 3, 1).calendarDaysTo(2021, 5, 1), 31 + 30);
+    expect(DateTime.utc(2021, 10, 1).calendarDaysTo(2021, 12, 1), 31 + 30);
+  });
+
   group('addCalendarDays:', () {
     // Pick an hour that is likely to always be valid.
     final startDate = DateTime(2020, 1, 1, 12, 34, 56);
 
     const daysInYear = 366; // `startDate` is in a leap year.
 
-    const paddingHours = Duration(hours: 6);
-
     test('Adds the correct number of days', () {
       for (var i = 0; i <= daysInYear; i += 1) {
         var futureDate = startDate.addCalendarDays(i);
-
-        // [Duration.inDays] returns the number of whole days (as 24-hour
-        // periods), rounded down.  Add a few hours before rounding down since
-        // `futureDate - startDate` might be less than 24 hours during DST
-        // changes.
-        expect((futureDate - startDate + paddingHours).inDays, i);
+        expect(
+          startDate.calendarDaysTo(
+              futureDate.year, futureDate.month, futureDate.day),
+          i,
+        );
       }
     });
 
