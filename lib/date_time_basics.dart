@@ -56,6 +56,8 @@ extension DateTimeBasics on DateTime {
   bool isAtOrAfter(DateTime other) => isAtSameMomentAs(other) || isAfter(other);
 
   /// Copies a [DateTime], overriding specified values.
+  ///
+  /// A UTC [DateTime] will remain in UTC; a local [DateTime] will remain local.
   DateTime copyWith({
     int? year,
     int? month,
@@ -66,27 +68,16 @@ extension DateTimeBasics on DateTime {
     int? millisecond,
     int? microsecond,
   }) {
-    return this.isUtc
-        ? DateTime.utc(
-            year ?? this.year,
-            month ?? this.month,
-            day ?? this.day,
-            hour ?? this.hour,
-            minute ?? this.minute,
-            second ?? this.second,
-            millisecond ?? this.millisecond,
-            microsecond ?? this.microsecond,
-          )
-        : DateTime(
-            year ?? this.year,
-            month ?? this.month,
-            day ?? this.day,
-            hour ?? this.hour,
-            minute ?? this.minute,
-            second ?? this.second,
-            millisecond ?? this.millisecond,
-            microsecond ?? this.microsecond,
-          );
+    return (isUtc ? DateTime.utc : DateTime.new)(
+      year ?? this.year,
+      month ?? this.month,
+      day ?? this.day,
+      hour ?? this.hour,
+      minute ?? this.minute,
+      second ?? this.second,
+      millisecond ?? this.millisecond,
+      microsecond ?? this.microsecond,
+    );
   }
 
   /// Adds a specified number of days to this [DateTime].
