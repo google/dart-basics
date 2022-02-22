@@ -128,19 +128,19 @@ void main() {
   });
 
   test('calendarDayTo works', () {
-    expect(DateTime(2020, 12, 31).calendarDaysTo(2021, 1, 1), 1);
-    expect(DateTime(2020, 12, 31, 23, 59).calendarDaysTo(2021, 1, 1), 1);
-    expect(DateTime(2021, 1, 1).calendarDaysTo(2020, 12, 31), -1);
+    expect(DateTime(2020, 12, 31).calendarDaysTill(2021, 1, 1), 1);
+    expect(DateTime(2020, 12, 31, 23, 59).calendarDaysTill(2021, 1, 1), 1);
+    expect(DateTime(2021, 1, 1).calendarDaysTill(2020, 12, 31), -1);
 
-    expect(DateTime(2021, 3, 1).calendarDaysTo(2021, 5, 1), 31 + 30);
-    expect(DateTime(2021, 10, 1).calendarDaysTo(2021, 12, 1), 31 + 30);
+    expect(DateTime(2021, 3, 1).calendarDaysTill(2021, 5, 1), 31 + 30);
+    expect(DateTime(2021, 10, 1).calendarDaysTill(2021, 12, 1), 31 + 30);
 
-    expect(DateTime.utc(2020, 12, 31).calendarDaysTo(2021, 1, 1), 1);
-    expect(DateTime.utc(2020, 12, 31, 23, 59).calendarDaysTo(2021, 1, 1), 1);
-    expect(DateTime.utc(2021, 1, 1).calendarDaysTo(2020, 12, 31), -1);
+    expect(DateTime.utc(2020, 12, 31).calendarDaysTill(2021, 1, 1), 1);
+    expect(DateTime.utc(2020, 12, 31, 23, 59).calendarDaysTill(2021, 1, 1), 1);
+    expect(DateTime.utc(2021, 1, 1).calendarDaysTill(2020, 12, 31), -1);
 
-    expect(DateTime.utc(2021, 3, 1).calendarDaysTo(2021, 5, 1), 31 + 30);
-    expect(DateTime.utc(2021, 10, 1).calendarDaysTo(2021, 12, 1), 31 + 30);
+    expect(DateTime.utc(2021, 3, 1).calendarDaysTill(2021, 5, 1), 31 + 30);
+    expect(DateTime.utc(2021, 10, 1).calendarDaysTill(2021, 12, 1), 31 + 30);
   });
 
   group('addCalendarDays:', () {
@@ -153,7 +153,7 @@ void main() {
       for (var i = 0; i <= daysInYear; i += 1) {
         var futureDate = startDate.addCalendarDays(i);
         expect(
-          startDate.calendarDaysTo(
+          startDate.calendarDaysTill(
               futureDate.year, futureDate.month, futureDate.day),
           i,
         );
