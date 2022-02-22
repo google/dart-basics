@@ -1,6 +1,6 @@
 ## [0.7.0]
 
-Added `copyWith`, `addCalendarDays`, and `calendarDaysTo` to `DateTimeBasics`.
+Added `copyWith`, `addCalendarDays`, and `calendarDaysTill` to `DateTimeBasics`.
 
 ## [0.6.0]
 
