@@ -1,3 +1,7 @@
+## [0.7.0]
+
+Added `copyWith`, `addCalendarDays`, and `calendarDaysTill` to `DateTimeBasics`.
+
 ## [0.6.0]
 
 Remove object basics (`isNull` and `isNotNull`).

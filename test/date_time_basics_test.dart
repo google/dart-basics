@@ -85,4 +85,113 @@ void main() {
       expect(utcTimeAfter.isAtOrAfter(localTime), true);
     });
   });
+
+  group('copyWith:', () {
+    test('Copies existing values', () {
+      var copy = utcTime.copyWith();
+      expect(utcTime, isNot(same(copy)));
+      expect(utcTime, copy);
+
+      copy = localTime.copyWith();
+      expect(localTime, isNot(same(copy)));
+      expect(localTime, copy);
+    });
+
+    test('Overrides existing values', () {
+      final utcOverrides = DateTime.utc(2000, 1, 2, 3, 4, 5, 6, 7);
+      final localOverrides = utcOverrides.toLocal();
+
+      var copy = utcTime.copyWith(
+        year: utcOverrides.year,
+        month: utcOverrides.month,
+        day: utcOverrides.day,
+        hour: utcOverrides.hour,
+        minute: utcOverrides.minute,
+        second: utcOverrides.second,
+        millisecond: utcOverrides.millisecond,
+        microsecond: utcOverrides.microsecond,
+      );
+      expect(copy, utcOverrides);
+
+      copy = localTime.copyWith(
+        year: localOverrides.year,
+        month: localOverrides.month,
+        day: localOverrides.day,
+        hour: localOverrides.hour,
+        minute: localOverrides.minute,
+        second: localOverrides.second,
+        millisecond: localOverrides.millisecond,
+        microsecond: localOverrides.microsecond,
+      );
+      expect(copy, localOverrides);
+    });
+  });
+
+  test('calendarDayTo works', () {
+    expect(DateTime(2020, 12, 31).calendarDaysTill(2021, 1, 1), 1);
+    expect(DateTime(2020, 12, 31, 23, 59).calendarDaysTill(2021, 1, 1), 1);
+    expect(DateTime(2021, 1, 1).calendarDaysTill(2020, 12, 31), -1);
+
+    expect(DateTime(2021, 3, 1).calendarDaysTill(2021, 5, 1), 31 + 30);
+    expect(DateTime(2021, 10, 1).calendarDaysTill(2021, 12, 1), 31 + 30);
+
+    expect(DateTime.utc(2020, 12, 31).calendarDaysTill(2021, 1, 1), 1);
+    expect(DateTime.utc(2020, 12, 31, 23, 59).calendarDaysTill(2021, 1, 1), 1);
+    expect(DateTime.utc(2021, 1, 1).calendarDaysTill(2020, 12, 31), -1);
+
+    expect(DateTime.utc(2021, 3, 1).calendarDaysTill(2021, 5, 1), 31 + 30);
+    expect(DateTime.utc(2021, 10, 1).calendarDaysTill(2021, 12, 1), 31 + 30);
+  });
+
+  group('addCalendarDays:', () {
+    // Pick an hour that is likely to always be valid.
+    final startDate = DateTime(2020, 1, 1, 12, 34, 56);
+
+    const daysInYear = 366; // `startDate` is in a leap year.
+
+    test('Adds the correct number of days', () {
+      for (var i = 0; i <= daysInYear; i += 1) {
+        var futureDate = startDate.addCalendarDays(i);
+        expect(
+          startDate.calendarDaysTill(
+              futureDate.year, futureDate.month, futureDate.day),
+          i,
+        );
+      }
+    });
+
+    test('Preserves time of day', () {
+      for (var i = 0; i <= daysInYear; i += 1) {
+        var futureDate = startDate.addCalendarDays(i);
+        expect(
+          [futureDate.hour, futureDate.minute, futureDate.second],
+          [startDate.hour, startDate.minute, startDate.second],
+        );
+      }
+
+      // This test is unfortunately dependent on the local timezone and is not
+      // meaningful if the local timezone does not observe daylight saving time.
+    }, skip: !_observesDaylightSaving());
+  });
+}
+
+/// Tries to empirically determine if the local timezone observes daylight
+/// saving time changes.
+///
+/// We can't control the local timezone used by [DateTime] in tests, so we have
+/// to guess.
+bool _observesDaylightSaving() {
+  final startDate = DateTime(2020, 1, 1, 12, 0);
+  var localDate = startDate.copyWith();
+
+  const oneDay = Duration(days: 1);
+  while (localDate.year < startDate.year + 1) {
+    localDate = localDate.add(oneDay);
+    if (localDate.hour != startDate.hour ||
+        localDate.minute != startDate.minute ||
+        localDate.second != startDate.second) {
+      return true;
+    }
+  }
+  return false;
 }
