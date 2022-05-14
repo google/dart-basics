@@ -14,15 +14,8 @@
 /// or sorting will provide the same cache instance with each call.
 int sortKeyCompare<T>(
     T a, T b, Comparable Function(T) sortKey, Map<T, Comparable> sortKeyCache) {
-  // Can't use putIfAbsent because that will evaluate sortKey every time,
-  // which defeats the point of using a cache.
-  final keyA = sortKeyCache[a] ?? sortKey(a);
-  final keyB = sortKeyCache[b] ?? sortKey(b);
-  if (!sortKeyCache.containsKey(a)) {
-    sortKeyCache[a] = keyA;
-  }
-  if (!sortKeyCache.containsKey(b)) {
-    sortKeyCache[b] = keyB;
-  }
-  return keyA.compareTo(keyB);
+  sortKeyCache[a] ??= sortKey(a);
+  sortKeyCache[b] ??= sortKey(b);
+  // Since both values were just set, safe to ignore null here.
+  return sortKeyCache[a]!.compareTo(sortKeyCache[b]!);
 }
