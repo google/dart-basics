@@ -201,6 +201,24 @@ void main() {
       expect(listA, [3, 11, 222]);
       expect(listB, [11, 222, 3]);
     });
+
+    test('does not calculate any sort key more than once', () {
+      final values = [3, 222, 11, 15, 18];
+
+      final callCounts = <int, int>{};
+      int recordCallAndReturn(int e) {
+        callCounts.putIfAbsent(e, () => 0);
+        callCounts[e] = callCounts[e]! + 1;
+        return e;
+      }
+
+      values.sortBy((e) => recordCallAndReturn(e));
+
+      expect(values, [3, 11, 15, 18, 222]);
+      expect(callCounts.length, 5);
+      expect(callCounts.keys.toSet(), values.toSet());
+      expect(callCounts.values.every((e) => e == 1), isTrue);
+    });
   });
 
   group('sortedCopyBy', () {
@@ -209,6 +227,24 @@ void main() {
       final sortedCopy = original.sortedCopyBy((e) => e.toString());
       expect(original, [3, 222, 11]);
       expect(sortedCopy, [11, 222, 3]);
+    });
+
+    test('does not calculate any sort key more than once', () {
+      final original = [3, 222, 11, 15, 18];
+
+      final callCounts = <int, int>{};
+      int recordCallAndReturn(int e) {
+        callCounts.putIfAbsent(e, () => 0);
+        callCounts[e] = callCounts[e]! + 1;
+        return e;
+      }
+
+      final sortedCopy = original.sortedCopyBy((e) => recordCallAndReturn(e));
+
+      expect(sortedCopy, [3, 11, 15, 18, 222]);
+      expect(callCounts.length, 5);
+      expect(callCounts.keys.toSet(), original.toSet());
+      expect(callCounts.values.every((e) => e == 1), isTrue);
     });
   });
 

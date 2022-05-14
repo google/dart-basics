@@ -5,6 +5,7 @@
 import 'dart:math' as math;
 
 import 'src/slice_indices.dart';
+import 'src/sort_key_compare.dart';
 
 /// Utility extension methods for the native [List] class.
 extension ListBasics<E> on List<E> {
@@ -93,7 +94,8 @@ extension ListBasics<E> on List<E> {
   /// list.sortBy((e) => e.toString().length); // list is now [3, 10, -12].
   /// ```
   void sortBy(Comparable Function(E) sortKey) {
-    this.sort((a, b) => sortKey(a).compareTo(sortKey(b)));
+    final sortKeyCache = <E, Comparable>{};
+    this.sort((a, b) => sortKeyCompare(a, b, sortKey, sortKeyCache));
   }
 
   /// Returns a copy of this list sorted by the value returned by [sortKey] for

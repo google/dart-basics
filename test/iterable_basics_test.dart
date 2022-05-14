@@ -349,6 +349,24 @@ void main() {
       expect(emptyInts.maxBy((a) => a.toString().length), isNull);
       expect(emptyStrings.maxBy((a) => a.length), isNull);
     });
+
+    test('does not calculate any sort key more than once', () {
+      final values = [3, 222, 11, 15, 18];
+
+      final callCounts = <int, int>{};
+      int recordCallAndReturn(int e) {
+        callCounts.putIfAbsent(e, () => 0);
+        callCounts[e] = callCounts[e]! + 1;
+        return e;
+      }
+
+      final result = values.maxBy((e) => recordCallAndReturn(e));
+
+      expect(result, 222);
+      expect(callCounts.length, 5);
+      expect(callCounts.keys.toSet(), values.toSet());
+      expect(callCounts.values.every((e) => e == 1), isTrue);
+    });
   });
 
   group('minBy', () {
@@ -370,6 +388,24 @@ void main() {
 
       expect(emptyInts.minBy((a) => a.toString().length), isNull);
       expect(emptyStrings.minBy((a) => a.length), isNull);
+    });
+
+    test('does not calculate any sort key more than once', () {
+      final values = [3, 222, 11, 15, 18];
+
+      final callCounts = <int, int>{};
+      int recordCallAndReturn(int e) {
+        callCounts.putIfAbsent(e, () => 0);
+        callCounts[e] = callCounts[e]! + 1;
+        return e;
+      }
+
+      final result = values.minBy((e) => recordCallAndReturn(e));
+
+      expect(result, 3);
+      expect(callCounts.length, 5);
+      expect(callCounts.keys.toSet(), values.toSet());
+      expect(callCounts.values.every((e) => e == 1), isTrue);
     });
   });
 
