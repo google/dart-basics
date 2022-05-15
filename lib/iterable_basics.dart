@@ -114,6 +114,9 @@ extension IterableBasics<E> on Iterable<E> {
   /// Returns the element of [this] with the greatest value for [sortKey], or
   /// [null] if [this] is empty.
   ///
+  /// This method is guaranteed to calculate [sortKey] only once for each
+  /// element.
+  ///
   /// Example:
   /// ```dart
   /// ['a', 'aaa', 'aa'].maxBy((e) => e.length).value; // 'aaa'
@@ -125,6 +128,9 @@ extension IterableBasics<E> on Iterable<E> {
 
   /// Returns the element of [this] with the least value for [sortKey], or
   /// [null] if [this] is empty.
+  ///
+  /// This method is guaranteed to calculate [sortKey] only once for each
+  /// element.
   ///
   /// Example:
   /// ```dart

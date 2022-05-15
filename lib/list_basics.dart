@@ -88,6 +88,9 @@ extension ListBasics<E> on List<E> {
 
   /// Sorts this list by the value returned by [sortKey] for each element.
   ///
+  /// This method is guaranteed to calculate [sortKey] only once for each
+  /// element.
+  ///
   /// Example:
   /// ```dart
   /// var list = [-12, 3, 10];
@@ -100,6 +103,9 @@ extension ListBasics<E> on List<E> {
 
   /// Returns a copy of this list sorted by the value returned by [sortKey] for
   /// each element.
+  ///
+  /// This method is guaranteed to calculate [sortKey] only once for each
+  /// element.
   ///
   /// Example:
   /// ```dart

@@ -207,8 +207,7 @@ void main() {
 
       final callCounts = <int, int>{};
       int recordCallAndReturn(int e) {
-        callCounts.putIfAbsent(e, () => 0);
-        callCounts[e] = callCounts[e]! + 1;
+        callCounts.update(e, (value) => value++, ifAbsent: () => 1);
         return e;
       }
 
@@ -234,8 +233,7 @@ void main() {
 
       final callCounts = <int, int>{};
       int recordCallAndReturn(int e) {
-        callCounts.putIfAbsent(e, () => 0);
-        callCounts[e] = callCounts[e]! + 1;
+        callCounts.update(e, (value) => value++, ifAbsent: () => 1);
         return e;
       }
 
