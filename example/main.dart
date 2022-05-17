@@ -4,7 +4,7 @@
 
 import 'package:basics/basics.dart';
 
-main() async {
+void main() async {
   const numbers = <int>[2, 4, 8];
 
   if (numbers.all((n) => n.isEven)) {
@@ -15,6 +15,6 @@ main() async {
 
   for (var _ in 5.range) {
     print('waiting 500 milliseconds...');
-    await Future.delayed(500.milliseconds);
+    await Future<void>.delayed(500.milliseconds);
   }
 }

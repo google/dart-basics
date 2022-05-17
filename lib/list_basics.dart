@@ -96,8 +96,8 @@ extension ListBasics<E> on List<E> {
   /// var list = [-12, 3, 10];
   /// list.sortBy((e) => e.toString().length); // list is now [3, 10, -12].
   /// ```
-  void sortBy(Comparable Function(E) sortKey) {
-    final sortKeyCache = <E, Comparable>{};
+  void sortBy(Comparable<Object?> Function(E) sortKey) {
+    final sortKeyCache = <E, Comparable<Object?>>{};
     this.sort((a, b) => sortKeyCompare(a, b, sortKey, sortKeyCache));
   }
 
@@ -113,7 +113,7 @@ extension ListBasics<E> on List<E> {
   /// var sorted = list.sortedCopyBy((e) => e.toString().length);
   /// // list is still [-12, 3, 10]. sorted is [3, 10, -12].
   /// ```
-  List<E> sortedCopyBy(Comparable Function(E) sortKey) {
+  List<E> sortedCopyBy(Comparable<Object?> Function(E) sortKey) {
     return List<E>.of(this)..sortBy(sortKey);
   }
 

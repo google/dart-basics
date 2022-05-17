@@ -20,7 +20,7 @@ void main() {
     });
 
     test('returns true for an empty iterable', () {
-      final empty = [];
+      final empty = <Object>[];
       final result = empty.none((e) => e.toString() == 'foo');
       expect(result, isTrue);
     });
@@ -46,7 +46,7 @@ void main() {
     });
 
     test('returns false for an empty iterable', () {
-      final empty = [];
+      final empty = <Object>[];
       final result = empty.one((e) => e.toString() == 'foo');
       expect(result, isFalse);
     });
@@ -94,8 +94,8 @@ void main() {
     });
 
     test('returns false for two empty iterables', () {
-      final empty1 = [];
-      final empty2 = [];
+      final empty1 = <Object>[];
+      final empty2 = <Object>[];
 
       expect(empty1.containsAny(empty2), isFalse);
       expect(empty2.containsAny(empty1), isFalse);
@@ -147,8 +147,8 @@ void main() {
     });
 
     test('returns true for two empty iterables', () {
-      final empty1 = [];
-      final empty2 = [];
+      final empty1 = <Object>[];
+      final empty2 = <Object>[];
 
       expect(empty1.containsAll(empty2), isTrue);
     });
@@ -422,7 +422,7 @@ void main() {
       expect(<double>[].sum(), 0);
       expect(<num>[].sum((n) => n * 2), 0);
       expect(<String>[].sum((s) => s.length), 0);
-      expect([].sum((n) => n * 2), 0);
+      expect(<int>[].sum((n) => n * 2), 0);
     });
 
     test('returns sum of custom addend', () {
@@ -449,7 +449,7 @@ void main() {
 
   group('getRandom', () {
     test('returns null for an empty iterable', () {
-      expect([].getRandom(), isNull);
+      expect(<int>[].getRandom(), isNull);
     });
 
     test('returns the only value of an iterable of length 1', () {
