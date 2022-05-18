@@ -203,7 +203,7 @@ void main() {
     });
 
     test('does not calculate any sort key more than once', () {
-      final values = [3, 222, 11, 15, 18];
+      final values = [3, 222, 3, 15, 18];
 
       final callCounts = <int, int>{};
       int recordCallAndReturn(int e) {
@@ -213,8 +213,8 @@ void main() {
 
       values.sortBy((e) => recordCallAndReturn(e));
 
-      expect(values, [3, 11, 15, 18, 222]);
-      expect(callCounts.length, 5);
+      expect(values, [3, 3, 15, 18, 222]);
+      expect(callCounts.length, values.toSet().length);
       expect(callCounts.keys.toSet(), values.toSet());
       expect(callCounts.values.every((e) => e == 1), isTrue);
     });
@@ -229,7 +229,7 @@ void main() {
     });
 
     test('does not calculate any sort key more than once', () {
-      final original = [3, 222, 11, 15, 18];
+      final original = [3, 222, 3, 15, 18];
 
       final callCounts = <int, int>{};
       int recordCallAndReturn(int e) {
@@ -239,8 +239,8 @@ void main() {
 
       final sortedCopy = original.sortedCopyBy((e) => recordCallAndReturn(e));
 
-      expect(sortedCopy, [3, 11, 15, 18, 222]);
-      expect(callCounts.length, 5);
+      expect(sortedCopy, [3, 3, 15, 18, 222]);
+      expect(callCounts.length, original.toSet().length);
       expect(callCounts.keys.toSet(), original.toSet());
       expect(callCounts.values.every((e) => e == 1), isTrue);
     });
