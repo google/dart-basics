@@ -426,6 +426,26 @@ void main() {
       expect(['a', 'b', 'c', 'd'].getRandom(seed: 45), 'c');
     });
   });
+
+  group('range', () {
+    test('returns a range from an iterable', () {
+      final values = [3, 8, 12, 4, 1];
+      expect(values.range(2, 4), [12, 4]);
+      expect(values.range(0, 2), [3, 8]);
+      expect(values.range(3, 5), [4, 1]);
+      expect(values.range(3, 3), []);
+    });
+
+    test('returns empty when from is greater than number of elements', () {
+      final values = [3, 8, 12, 4, 1];
+      expect(values.range(5, 8), []);
+    });
+
+    test('returns to end when to is greater than number of elements', () {
+      final values = [3, 8, 12, 4, 1];
+      expect(values.range(3, 10), [4, 1]);
+    });
+  });
 }
 
 num _getItemSize(dynamic item) {

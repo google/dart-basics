@@ -136,7 +136,7 @@ extension IterableBasics<E> on Iterable<E> {
   ///
   /// Example:
   /// ```dart
-  /// ['a', 'aa', 'aaa'].sum((s) => s.length); // 6.
+  /// ['a', 'aa', 'aaa'].sum((s) => s.length); // 6
   /// ```
   num sum(num Function(E) addend) => this.isEmpty
       ? 0
@@ -149,6 +149,24 @@ extension IterableBasics<E> on Iterable<E> {
   E? getRandom({int? seed}) => this.isEmpty
       ? null
       : this.elementAt(math.Random(seed).nextInt(this.length));
+
+  /// Returns an [Iterable] containing the first [to] elements of [this],
+  /// excluding the first [from] elements.
+  ///
+  /// If [from] is greater than or equal to the number of elements available
+  /// in [this], this method will return an empty [Iterable].
+  ///
+  /// If [to] is greater than the number of elements available in [this],
+  /// this method will return all available elements from [from] to the
+  /// end of [this].
+  ///
+  /// Example:
+  /// ```dart
+  /// [3, 8, 12, 4, 1].range(2, 4); // [12, 4]
+  /// [3, 8, 12, 4, 1].range(6, 8); // []
+  /// [3, 8, 12, 4, 1].range(3, 10); // [4, 1]
+  /// ```
+  Iterable<E> range(int from, int to) => this.skip(from).take(to - from);
 }
 
 /// Utility extension methods for [Iterable]s containing [num]s.
