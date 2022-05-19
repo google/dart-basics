@@ -5,7 +5,7 @@
 name: basics
 version: 0.7.0
 description: A Dart library containing convenient extension methods on basic Dart objects.
-homepage: https://github.com/google/dart-basics
+repository: https://github.com/google/dart-basics
 
 environment:
   sdk: ">=2.15.0 <3.0.0"
