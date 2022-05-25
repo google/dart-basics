@@ -427,23 +427,50 @@ void main() {
     });
   });
 
-  group('range', () {
+  group('getRange', () {
     test('returns a range from an iterable', () {
-      final values = [3, 8, 12, 4, 1];
-      expect(values.range(2, 4), [12, 4]);
-      expect(values.range(0, 2), [3, 8]);
-      expect(values.range(3, 5), [4, 1]);
-      expect(values.range(3, 3), []);
+      final values = {3, 8, 12, 4, 1};
+      expect(values.getRange(2, 4), [12, 4]);
+      expect(values.getRange(0, 2), [3, 8]);
+      expect(values.getRange(3, 5), [4, 1]);
+      expect(values.getRange(3, 3), []);
+      expect(values.getRange(5, 5), []);
     });
 
-    test('returns empty when from is greater than number of elements', () {
-      final values = [3, 8, 12, 4, 1];
-      expect(values.range(5, 8), []);
+    test('matches the behavior of List#getRange', () {
+      final iterableValues = {3, 8, 12, 4, 1};
+      final listValues = [3, 8, 12, 4, 1];
+      expect(iterableValues.getRange(2, 4), listValues.getRange(2, 4));
+      expect(iterableValues.getRange(0, 2), listValues.getRange(0, 2));
+      expect(iterableValues.getRange(3, 5), listValues.getRange(3, 5));
+      expect(iterableValues.getRange(3, 3), listValues.getRange(3, 3));
+      expect(iterableValues.getRange(5, 5), listValues.getRange(5, 5));
     });
 
-    test('returns to end when to is greater than number of elements', () {
-      final values = [3, 8, 12, 4, 1];
-      expect(values.range(3, 10), [4, 1]);
+    test('throws error when start > number of elements', () {
+      final values = {3, 8, 12, 4, 1};
+      expect(() => values.getRange(6, 7), throwsRangeError);
+    });
+
+    test('matches List#getRange when start > number of elements', () {
+      final iterableValues = {3, 8, 12, 4, 1};
+      final listValues = [3, 8, 12, 4, 1];
+      final iterableError = _getRangeError(() => iterableValues.getRange(6, 7));
+      final listError = _getRangeError(() => listValues.getRange(6, 7));
+      _expectRangeErrorMatches(iterableError, listError);
+    });
+
+    test('throws error when end > number of elements', () {
+      final values = {3, 8, 12, 4, 1};
+      expect(() => values.getRange(4, 8), throwsRangeError);
+    });
+
+    test('matches List#getRange when end > number of elements', () {
+      final iterableValues = {3, 8, 12, 4, 1};
+      final listValues = [3, 8, 12, 4, 1];
+      final iterableError = _getRangeError(() => iterableValues.getRange(4, 8));
+      final listError = _getRangeError(() => listValues.getRange(4, 8));
+      _expectRangeErrorMatches(iterableError, listError);
     });
   });
 }
@@ -452,4 +479,20 @@ num _getItemSize(dynamic item) {
   if (item is num) return item;
   if (item is String) return item.length;
   throw UnimplementedError();
+}
+
+RangeError _getRangeError(Iterable Function() f) {
+  try {
+    f();
+  } on RangeError catch (e) {
+    return e;
+  }
+  throw AssertionError("Expected RangeError but none was thrown");
+}
+
+void _expectRangeErrorMatches(RangeError actual, RangeError expected) {
+  expect(actual.start, expected.start);
+  expect(actual.end, expected.end);
+  expect(actual.name, expected.name);
+  expect(actual.message, expected.message);
 }

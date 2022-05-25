@@ -150,23 +150,20 @@ extension IterableBasics<E> on Iterable<E> {
       ? null
       : this.elementAt(math.Random(seed).nextInt(this.length));
 
-  /// Returns an [Iterable] containing the first [to] elements of [this],
-  /// excluding the first [from] elements.
+  /// Returns an [Iterable] containing the first [end] elements of [this],
+  /// excluding the first [start] elements.
   ///
-  /// If [from] is greater than or equal to the number of elements available
-  /// in [this], this method will return an empty [Iterable].
-  ///
-  /// If [to] is greater than the number of elements available in [this],
-  /// this method will return all available elements from [from] to the
-  /// end of [this].
+  /// This method is a generalization of [List.getRange] to [Iterable]s,
+  /// and obeys the same contract.
   ///
   /// Example:
   /// ```dart
-  /// [3, 8, 12, 4, 1].range(2, 4); // [12, 4]
-  /// [3, 8, 12, 4, 1].range(6, 8); // []
-  /// [3, 8, 12, 4, 1].range(3, 10); // [4, 1]
+  /// {3, 8, 12, 4, 1}.range(2, 4); // [12, 4]
   /// ```
-  Iterable<E> range(int from, int to) => this.skip(from).take(to - from);
+  Iterable<E> getRange(int start, int end) {
+    RangeError.checkValidRange(start, end, this.length);
+    return this.skip(start).take(end - start);
+  }
 }
 
 /// Utility extension methods for [Iterable]s containing [num]s.
