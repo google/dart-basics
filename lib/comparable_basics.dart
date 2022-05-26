@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'dart:math' as math show min, max;
+
 /// Utility extension methods for the [Comparable] class.
 extension ComparableBasics<T> on Comparable<T> {
   /// Returns true if [this] should be ordered strictly before [other].
@@ -18,7 +20,21 @@ extension ComparableBasics<T> on Comparable<T> {
 }
 
 /// Returns the greater of two [Comparable] objects.
-T max<T extends Comparable<Object>>(T a, T b) => (a >= b) ? a : b;
+///
+/// For [num] values, behaves identically to [math.max].
+T max<T extends Comparable<Object>>(T a, T b) {
+  if (a is num) {
+    return math.max(a, b as num) as T;
+  }
+  return (a >= b) ? a : b;
+}
 
 /// Returns the lesser of two [Comparable] objects.
-T min<T extends Comparable<Object>>(T a, T b) => (a <= b) ? a : b;
+///
+/// For [num] values, behaves identically to [math.min].
+T min<T extends Comparable<Object>>(T a, T b) {
+  if (a is num) {
+    return math.min(a, b as num) as T;
+  }
+  return (a <= b) ? a : b;
+}
