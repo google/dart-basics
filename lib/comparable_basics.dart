@@ -22,6 +22,9 @@ extension ComparableBasics<T> on Comparable<T> {
 /// Returns the greater of two [Comparable] objects.
 ///
 /// For [num] values, behaves identically to [math.max].
+///
+/// If the arguments compare equal, then it is unspecified which of the two
+/// arguments is returned.
 T max<T extends Comparable<Object>>(T a, T b) {
   if (a is num) {
     return math.max(a, b as num) as T;
@@ -32,6 +35,9 @@ T max<T extends Comparable<Object>>(T a, T b) {
 /// Returns the lesser of two [Comparable] objects.
 ///
 /// For [num] values, behaves identically to [math.min].
+///
+/// If the arguments compare equal, then it is unspecified which of the two
+/// arguments is returned.
 T min<T extends Comparable<Object>>(T a, T b) {
   if (a is num) {
     return math.min(a, b as num) as T;
