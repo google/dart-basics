@@ -4,6 +4,8 @@
 
 import 'dart:math' as math;
 
+import 'src/sort_key_compare.dart';
+
 /// Utility extension methods for the native [Iterable] class.
 extension IterableBasics<E> on Iterable<E> {
   /// Alias for [Iterable]`.every`.
@@ -112,22 +114,32 @@ extension IterableBasics<E> on Iterable<E> {
   /// Returns the element of [this] with the greatest value for [sortKey], or
   /// [null] if [this] is empty.
   ///
+  /// This method is guaranteed to calculate [sortKey] only once for each
+  /// element.
+  ///
   /// Example:
   /// ```dart
   /// ['a', 'aaa', 'aa'].maxBy((e) => e.length).value; // 'aaa'
   /// ```
-  E? maxBy(Comparable Function(E) sortKey) =>
-      this.max((a, b) => sortKey(a).compareTo(sortKey(b)));
+  E? maxBy(Comparable Function(E) sortKey) {
+    final sortKeyCache = <E, Comparable>{};
+    return this.max((a, b) => sortKeyCompare<E>(a, b, sortKey, sortKeyCache));
+  }
 
   /// Returns the element of [this] with the least value for [sortKey], or
   /// [null] if [this] is empty.
+  ///
+  /// This method is guaranteed to calculate [sortKey] only once for each
+  /// element.
   ///
   /// Example:
   /// ```dart
   /// ['a', 'aaa', 'aa'].minBy((e) => e.length).value; // 'a'
   /// ```
-  E? minBy(Comparable Function(E) sortKey) =>
-      this.min((a, b) => sortKey(a).compareTo(sortKey(b)));
+  E? minBy(Comparable Function(E) sortKey) {
+    final sortKeyCache = <E, Comparable>{};
+    return this.min((a, b) => sortKeyCompare<E>(a, b, sortKey, sortKeyCache));
+  }
 
   /// Returns the sum of all the values in this iterable, as defined by
   /// [addend].
