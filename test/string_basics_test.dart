@@ -302,4 +302,54 @@ void main() {
       expect(''.reverse(), '');
     });
   });
+
+  group('isBlank', () {
+    test('returns true if a string is blank', () {
+      expect(''.isBlank, isTrue);
+    });
+
+    test('returns false if a string is not blank', () {
+      expect('a'.isBlank, isFalse);
+    });
+  });
+
+  group('isNotBlank', () {
+    test('returns false if a string is blank', () {
+      expect(''.isNotBlank, isFalse);
+    });
+
+    test('returns true if a string is not blank', () {
+      expect('a'.isNotBlank, isTrue);
+    });
+  });
+
+  group('isNullOrBlank', () {
+    test('returns true if a string is null', () {
+      final String? string = null;
+      expect(string.isNullOrBlank, isTrue);
+    });
+
+    test('returns true if a string is blank', () {
+      expect(''.isNullOrBlank, isTrue);
+    });
+
+    test('returns false if a string is not blank', () {
+      expect('a'.isNullOrBlank, isFalse);
+    });
+  });
+
+  group('isNotNullOrBlank', () {
+    test('returns false if a string is null', () {
+      final String? string = null;
+      expect(string.isNotNullOrBlank, isFalse);
+    });
+
+    test('returns false if a string is blank', () {
+      expect(''.isNotNullOrBlank, isFalse);
+    });
+
+    test('returns true if a string is not blank', () {
+      expect('a'.isNotNullOrBlank, isTrue);
+    });
+  });
 }

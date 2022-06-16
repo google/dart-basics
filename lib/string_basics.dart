@@ -201,3 +201,13 @@ extension StringBasics on String {
     return stringBuffer.toString();
   }
 }
+
+extension NullableStringBasics on String? {
+  /// Returns `true` if [this] is null, empty, or consists solely of
+  /// whitespace characters as defined by [String.trim].
+  bool get isNullOrBlank => this?.trim()?.isEmpty ?? true;
+
+  /// Returns `true` if [this] is not null, not empty, and does not consist
+  /// solely of whitespace characters as defined by [String.trim].
+  bool get isNotNullOrBlank => this?.trim()?.isNotEmpty ?? false;
+}
