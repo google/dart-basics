@@ -1,3 +1,10 @@
+## [0.8.0]
+
+* Added `ComparableBasics`.
+* Added `getRange` to `Iterable`.
+* Added `isNullOrBlank` and `isNotNullOrBlank` to `String?`
+* Improved performance of `maxBy`, `minBy` and `sortBy` by adding a cache.
+
 ## [0.7.0]
 
 Added `copyWith`, `addCalendarDays`, and `calendarDaysTill` to `DateTimeBasics`.
