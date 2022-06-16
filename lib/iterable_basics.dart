@@ -121,8 +121,8 @@ extension IterableBasics<E> on Iterable<E> {
   /// ```dart
   /// ['a', 'aaa', 'aa'].maxBy((e) => e.length).value; // 'aaa'
   /// ```
-  E? maxBy(Comparable<Object?> Function(E) sortKey) {
-    final sortKeyCache = <E, Comparable<Object?>>{};
+  E? maxBy(Comparable<dynamic> Function(E) sortKey) {
+    final sortKeyCache = <E, Comparable<dynamic>>{};
     return this.max((a, b) => sortKeyCompare<E>(a, b, sortKey, sortKeyCache));
   }
 
@@ -136,8 +136,8 @@ extension IterableBasics<E> on Iterable<E> {
   /// ```dart
   /// ['a', 'aaa', 'aa'].minBy((e) => e.length).value; // 'a'
   /// ```
-  E? minBy(Comparable<Object?> Function(E) sortKey) {
-    final sortKeyCache = <E, Comparable<Object?>>{};
+  E? minBy(Comparable<dynamic> Function(E) sortKey) {
+    final sortKeyCache = <E, Comparable<dynamic>>{};
     return this.min((a, b) => sortKeyCompare<E>(a, b, sortKey, sortKeyCache));
   }
 

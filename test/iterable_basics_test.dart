@@ -467,8 +467,8 @@ void main() {
       expect(values.getRange(2, 4), [12, 4]);
       expect(values.getRange(0, 2), [3, 8]);
       expect(values.getRange(3, 5), [4, 1]);
-      expect(values.getRange(3, 3), []);
-      expect(values.getRange(5, 5), []);
+      expect(values.getRange(3, 3), <int>[]);
+      expect(values.getRange(5, 5), <int>[]);
     });
 
     test('matches the behavior of List#getRange', () {
@@ -515,7 +515,7 @@ num _getItemSize(dynamic item) {
   throw UnimplementedError();
 }
 
-RangeError _getRangeError(Iterable Function() f) {
+RangeError _getRangeError(Iterable<Object?> Function() f) {
   try {
     f();
   } on RangeError catch (e) {

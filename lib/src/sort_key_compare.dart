@@ -13,7 +13,11 @@
 /// It is expected that all calls to this function within a single ordering
 /// or sorting will provide the same cache instance with each call.
 int sortKeyCompare<T>(
-    T a, T b, Comparable Function(T) sortKey, Map<T, Comparable> sortKeyCache) {
+  T a,
+  T b,
+  Comparable<Object?> Function(T) sortKey,
+  Map<T, Comparable<Object?>> sortKeyCache,
+) {
   final keyA = sortKeyCache.putIfAbsent(a, () => sortKey(a));
   final keyB = sortKeyCache.putIfAbsent(b, () => sortKey(b));
   return keyA.compareTo(keyB);
