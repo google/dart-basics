@@ -1,3 +1,7 @@
+## [0.9.0]
+
+* Added stricter type checks.
+
 ## [0.8.0]
 
 * Added `ComparableBasics`.
