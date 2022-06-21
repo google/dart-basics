@@ -1,4 +1,6 @@
-# Dart Basics
+[![Dart CI](https://github.com/google/dart-basics/actions/workflows/dart.yml/badge.svg)](https://github.com/google/dart-basics/actions/workflows/dart.yml)
+[![pub package](https://img.shields.io/pub/v/basics.svg)](https://pub.dev/packages/basics)
+[![package publisher](https://img.shields.io/pub/publisher/basics.svg)](https://pub.dev/packages/basics/publisher)
 
 This repository contains a collection of useful extension methods on the
 built-in objects in Dart, such as String, Iterable, and Object.
