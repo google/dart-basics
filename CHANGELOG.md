@@ -1,4 +1,4 @@
-## [0.9.0]
+## [0.8.1]
 
 * Added stricter type checks.
 
