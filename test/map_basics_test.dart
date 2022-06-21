@@ -60,8 +60,8 @@ void main() {
     });
 
     test('returns an empty map when called on an empty map', () {
-      final map = {};
-      expect(map.invert(), {});
+      final map = <Object, Object>{};
+      expect(map.invert(), <Object, Object>{});
     });
   });
 }

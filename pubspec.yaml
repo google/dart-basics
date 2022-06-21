@@ -3,12 +3,12 @@
 # license that can be found in the LICENSE file.
 
 name: basics
-version: 0.8.0
+version: 0.8.1
 description: A Dart library containing convenient extension methods on basic Dart objects.
 repository: https://github.com/google/dart-basics
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dev_dependencies:
   pedantic: ^1.8.0
