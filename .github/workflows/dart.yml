@@ -11,7 +11,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        sdk: [2.17.0, stable, dev]
+
+    name: build on ${{ matrix.os }} for ${{ matrix.sdk }}
 
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
