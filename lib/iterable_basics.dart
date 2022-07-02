@@ -166,8 +166,7 @@ extension IterableBasics<E> on Iterable<E> {
   num average(num Function(E) addend) {
     if (this.isEmpty) return 0;
 
-    return this.fold(0, (prev, element) => (prev as num) + addend(element)) /
-        this.length;
+    return this.sum(addend) / this.length;
   }
 
   /// Returns a random element of [this], or [null] if [this] is empty.
@@ -270,14 +269,7 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
   num average([num Function(E)? addend]) {
     if (this.isEmpty) return 0;
 
-    return addend == null
-        ? this.reduce((a, b) => (a + b) as E) / this.length
-        : this.fold(
-              0,
-              (prev, element) =>
-                  (prev == null ? 0 : prev as E) + addend(element),
-            ) /
-            this.length;
+    return this.sum(addend) / this.length;
   }
 }
 
