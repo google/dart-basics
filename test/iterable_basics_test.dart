@@ -412,8 +412,6 @@ void main() {
       final nums = [2, 2, 4, 8];
       final ints = [2, 2, 2];
 
-      nums.average();
-
       expect(nums.average(), 4);
       expect(ints.average(), 2);
       expect(ints.average((n) => n * 2), 4);
