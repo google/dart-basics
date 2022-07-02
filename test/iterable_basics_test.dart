@@ -407,6 +407,49 @@ void main() {
     });
   });
 
+  group('average', () {
+    test('returns average on list of numbers', () {
+      final nums = [2, 2, 4, 8];
+      final ints = [2, 2, 2];
+
+      nums.average();
+
+      expect(nums.average(), 4);
+      expect(ints.average(), 2);
+      expect(ints.average((n) => n * 2), 4);
+      expect(nums.average((n) => n + 1), 5);
+    });
+
+    test('returns 0 on empty lists', () {
+      expect(<int>[].average(), 0);
+      expect(<double>[].average(), 0);
+      expect(<num>[].average((n) => n * 2), 0);
+      expect(<String>[].average((s) => s.length), 0);
+      expect(<int>[].average((n) => n * 2), 0);
+    });
+
+    test('returns average of custom addend', () {
+      final strings = ['a', 'aa', 'aaa'];
+
+      expect(strings.average((s) => s.length), 2);
+    });
+
+    test('works on sets', () {
+      final strings = {'a', 'aa', 'aaa'};
+
+      expect(strings.average((s) => s.length), 2);
+    });
+
+    test('works on dynamic list with custom addend', () {
+      final items = [1, 'aaa', 2.0];
+
+      expect(items.average((a) => _getItemSize(a)), equals(2));
+
+      items.add(0.5);
+      expect(items.average((a) => _getItemSize(a)), equals(1.625));
+    });
+  });
+
   group('sum', () {
     test('returns sum on list of numbers', () {
       final nums = [1.5, 2, 3];
