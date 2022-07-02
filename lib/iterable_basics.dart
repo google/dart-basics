@@ -154,6 +154,22 @@ extension IterableBasics<E> on Iterable<E> {
       ? 0
       : this.fold(0, (prev, element) => prev + addend(element));
 
+  /// Returns the average of all the values in this iterable, as defined by
+  /// [addend].
+  ///
+  /// Returns 0 if [this] is empty.
+  ///
+  /// Example:
+  /// ```dart
+  /// ['a', 'aa', 'aaa'].average((s) => s.length); // 2
+  /// ```
+  num average(num Function(E) addend) {
+    if (this.isEmpty) return 0;
+
+    return this.fold(0, (prev, element) => (prev as num) + addend(element)) /
+        this.length;
+  }
+
   /// Returns a random element of [this], or [null] if [this] is empty.
   ///
   /// If [seed] is provided, will be used as the random seed for determining
@@ -236,6 +252,32 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
     return addend == null
         ? this.reduce((a, b) => (a + b) as E)
         : this.fold(0, (prev, element) => prev + addend(element));
+  }
+
+  /// Returns the average of all the values in this iterable.
+  ///
+  /// If [addend] is provided, it will be used to compute the value to be
+  /// summed.
+  ///
+  /// Returns 0 if [this] is empty.
+  ///
+  /// Example:
+  /// ```dart
+  /// [2, 2, 4, 8].average(); // 4.
+  /// [2, 2, 4, 8].average((i) => i + 1); // 5.
+  /// [].average() // 0.
+  /// ```
+  num average([num Function(E)? addend]) {
+    if (this.isEmpty) return 0;
+
+    return addend == null
+        ? this.reduce((a, b) => (a + b) as E) / this.length
+        : this.fold(
+              0,
+              (prev, element) =>
+                  (prev == null ? 0 : prev as E) + addend(element),
+            ) /
+            this.length;
   }
 }
 
