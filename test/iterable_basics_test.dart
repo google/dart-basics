@@ -409,13 +409,15 @@ void main() {
 
   group('average', () {
     test('returns average on list of numbers', () {
-      final nums = [2, 2, 4, 8];
-      final ints = [2, 2, 2];
+      final nums = <int>[2, 2, 4, 8];
+      final ints = <int>[2, 2, 2];
+      final numbers = [1.5, 1.5, 3, 3];
 
       expect(nums.average(), 4);
       expect(ints.average(), 2);
       expect(ints.average((n) => n * 2), 4);
       expect(nums.average((n) => n + 1), 5);
+      expect(numbers.average(), 2.25);
     });
 
     test('returns 0 on empty lists', () {
