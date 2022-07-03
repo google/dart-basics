@@ -421,11 +421,11 @@ void main() {
     });
 
     test('returns 0 on empty lists', () {
-      expect(<int>[].average(), 0);
-      expect(<double>[].average(), 0);
-      expect(<num>[].average((n) => n * 2), 0);
-      expect(<String>[].average((s) => s.length), 0);
-      expect(<int>[].average((n) => n * 2), 0);
+      expect(<int>[].average(), null);
+      expect(<double>[].average(), null);
+      expect(<num>[].average((n) => n * 2), null);
+      expect(<String>[].average((s) => s.length), null);
+      expect(<int>[].average((n) => n * 2), null);
     });
 
     test('returns average of custom addend', () {
