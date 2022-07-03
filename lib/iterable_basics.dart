@@ -256,7 +256,7 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
   /// Returns the average of all the values in this iterable.
   ///
   /// If [addend] is provided, it will be used to compute the value to be
-  /// summed.
+  /// averaged.
   ///
   /// Returns 0 if [this] is empty.
   ///
