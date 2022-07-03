@@ -155,7 +155,7 @@ extension IterableBasics<E> on Iterable<E> {
       : this.fold(0, (prev, element) => prev + addend(element));
 
   /// Returns the average of all the values in this iterable, as defined by
-  /// [addend].
+  /// [value].
   ///
   /// Returns null if [this] is empty.
   ///
@@ -164,10 +164,10 @@ extension IterableBasics<E> on Iterable<E> {
   /// ['a', 'aa', 'aaa'].average((s) => s.length); // 2
   /// [].average(); // null
   /// ```
-  num? average(num Function(E) addend) {
+  num? average(num Function(E) value) {
     if (this.isEmpty) return null;
 
-    return this.sum(addend) / this.length;
+    return this.sum(value) / this.length;
   }
 
   /// Returns a random element of [this], or [null] if [this] is empty.
