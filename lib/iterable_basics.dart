@@ -157,14 +157,15 @@ extension IterableBasics<E> on Iterable<E> {
   /// Returns the average of all the values in this iterable, as defined by
   /// [addend].
   ///
-  /// Returns 0 if [this] is empty.
+  /// Returns null if [this] is empty.
   ///
   /// Example:
   /// ```dart
   /// ['a', 'aa', 'aaa'].average((s) => s.length); // 2
+  /// [].average(); // null
   /// ```
-  num average(num Function(E) addend) {
-    if (this.isEmpty) return 0;
+  num? average(num Function(E) addend) {
+    if (this.isEmpty) return null;
 
     return this.sum(addend) / this.length;
   }
@@ -258,16 +259,16 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
   /// If [addend] is provided, it will be used to compute the value to be
   /// averaged.
   ///
-  /// Returns 0 if [this] is empty.
+  /// Returns null if [this] is empty.
   ///
   /// Example:
   /// ```dart
   /// [2, 2, 4, 8].average(); // 4.
   /// [2, 2, 4, 8].average((i) => i + 1); // 5.
-  /// [].average() // 0.
+  /// [].average() // null.
   /// ```
-  num average([num Function(E)? addend]) {
-    if (this.isEmpty) return 0;
+  num? average([num Function(E)? addend]) {
+    if (this.isEmpty) return null;
 
     return this.sum(addend) / this.length;
   }
