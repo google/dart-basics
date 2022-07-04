@@ -428,7 +428,7 @@ void main() {
       expect(<int>[].average((n) => n * 2), null);
     });
 
-    test('returns average of custom addend', () {
+    test('returns average of custom value function', () {
       final strings = ['a', 'aa', 'aaa'];
 
       expect(strings.average((s) => s.length), 2);
@@ -440,7 +440,7 @@ void main() {
       expect(strings.average((s) => s.length), 2);
     });
 
-    test('works on dynamic list with custom addend', () {
+    test('works on dynamic list with custom value function', () {
       final items = [1, 'aaa', 2.0];
 
       expect(items.average((a) => _getItemSize(a)), equals(2));

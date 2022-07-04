@@ -256,7 +256,7 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
 
   /// Returns the average of all the values in this iterable.
   ///
-  /// If [addend] is provided, it will be used to compute the value to be
+  /// If [value] is provided, it will be used to compute the value to be
   /// averaged.
   ///
   /// Returns null if [this] is empty.
@@ -267,10 +267,10 @@ extension NumIterableBasics<E extends num> on Iterable<E> {
   /// [2, 2, 4, 8].average((i) => i + 1); // 5.
   /// [].average() // null.
   /// ```
-  num? average([num Function(E)? addend]) {
+  num? average([num Function(E)? value]) {
     if (this.isEmpty) return null;
 
-    return this.sum(addend) / this.length;
+    return this.sum(value) / this.length;
   }
 }
 
