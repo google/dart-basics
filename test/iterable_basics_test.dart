@@ -420,7 +420,7 @@ void main() {
       expect(numbers.average(), 2.25);
     });
 
-    test('returns 0 on empty lists', () {
+    test('returns null on empty lists', () {
       expect(<int>[].average(), null);
       expect(<double>[].average(), null);
       expect(<num>[].average((n) => n * 2), null);
