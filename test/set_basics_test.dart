@@ -257,4 +257,72 @@ void main() {
       expect(values.classify<int>((e) => e.length), <int, Set<String>>{});
     });
   });
+
+  group('pluck', () {
+    test('Pluck values by key', () {
+      final items = {
+        {
+          'sku': 'SKU-123',
+          'title': 'Soap',
+          'price': 2.23
+        },
+        {
+          'sku': 'SKU-124',
+          'title': 'Shampoo',
+          'price': 2.25
+        }
+      };
+
+      final values = items.pluck('price');
+
+      expect(values, [2.23, 2.25]);
+    });
+
+    test('Results to empty list when plucking values by key that does not exist.', () {
+      final items = {
+        {
+          'first_name': 'John',
+          'last_name': 'Doe',
+          'age': 23
+        },
+        {
+          'first_name': 'Jane',
+          'last_name': 'Doe',
+          'age': 25
+        },
+      };
+
+      final values = items.pluck('address');
+
+      expect(values.isEmpty, true);
+    });
+
+    test('Pluck mixed values by key', () {
+      final items = {
+        {
+          'id': 123,
+          'title': 'Saving Private Ryan',
+          'cast': [
+            'Tom Hanks',
+            'Matt Damon'
+          ]
+        },
+        {
+          'id': 124,
+          'title': 'Forrest Gump',
+          'cast': 'Tom Hanks'
+        },
+      };
+
+      final values = items.pluck('cast');
+
+      expect(values, [
+        [
+          'Tom Hanks',
+          'Matt Damon'
+        ],
+        'Tom Hanks'
+      ]);
+    });
+  });
 }
