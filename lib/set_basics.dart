@@ -121,3 +121,9 @@ extension SetBasics<E> on Set<E> {
     return groups;
   }
 }
+
+extension MapSets<E extends Map<String, dynamic>> on Set<E> {
+  List<dynamic> pluck(String key) {
+    return this.map((item) => item[key]).where((item) => item != null).toList();
+  }
+}
