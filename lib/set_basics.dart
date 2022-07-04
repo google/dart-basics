@@ -122,8 +122,29 @@ extension SetBasics<E> on Set<E> {
   }
 }
 
-extension MapSets<E extends Map<String, dynamic>> on Set<E> {
-  List<dynamic> pluck(String key) {
-    return this.map((item) => item[key]).where((item) => item != null).toList();
-  }
+/// Utility extension methods for the native [Set] class with Map children.
+extension MapSetsBasics<E extends Map<String, dynamic>> on Set<E> {
+  /// Plucks a list of values from maps using a key.
+  ///
+  /// Example:
+  /// ```dart
+  /// final products = {
+  ///   {
+  ///     'sku': 'FOO-1',
+  ///     'title: 'Backpack',
+  ///     'price': 9.99,
+  ///   },
+  ///   {
+  ///     'sku': 'FOO-2',
+  ///     'title': 'Wallet',
+  ///     'price': 8.99
+  ///   }
+  /// };
+  ///
+  /// final titles = products.pluck('title'); // ['Backpack', 'Wallet']
+  /// ```
+  ///
+  /// The [key] is the target key to be plucked from each map.
+  List<dynamic> pluck(String key) =>
+      this.map((item) => item[key]).where((item) => item != null).toList();
 }
