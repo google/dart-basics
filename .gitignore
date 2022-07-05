@@ -16,3 +16,5 @@ doc/api/
 
 # macOS stuff.
 .DS_Store
+
+.vscode/launch.json
