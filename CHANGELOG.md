@@ -1,3 +1,7 @@
+## [0.9.0]
+
+* Added `average` method to `Iterable`.
+
 ## [0.8.1]
 
 * Added stricter type checks.
