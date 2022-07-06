@@ -369,11 +369,5 @@ void main() {
     test('returns empty if the string is empty', () {
       expect(''.upperCaseFirst(), '');
     });
-
-    test('returns null if the string is null', () {
-      final String? nullableString = null;
-
-      expect(nullableString?.upperCaseFirst(), null);
-    });
   });
 }

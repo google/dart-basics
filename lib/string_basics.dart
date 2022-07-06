@@ -229,17 +229,4 @@ extension NullableStringBasics on String? {
   /// Returns `true` if [this] is not null, not empty, and does not consist
   /// solely of whitespace characters as defined by [String.trim].
   bool get isNotNullOrBlank => this?.trim().isNotEmpty ?? false;
-
-  /// Returns a string with the first character of string capitalized,
-  /// if that character is alphabetic and if null then returns null.
-  ///
-  /// Example:
-  /// ```dart
-  /// final foo = 'bar';
-  /// final baz = foo.upperCaseFirst(); // 'Bar'
-  ///
-  /// final String? test = null;
-  /// final result = test.upperCaseFirst(); // null
-  /// ```
-  String? upperCaseFirst() => this == null ? null : this.upperCaseFirst();
 }
