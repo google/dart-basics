@@ -355,35 +355,31 @@ void main() {
 
   group('limit', () {
     test(
-      'returns a truncated string that has the length based on the limit provided',
-      () {
-        final sentence = 'The quick brown fox jumps over the lazy dog';
-        expect(sentence.limit(20), 'The quick brown fox...');
-      },
-    );
+        'returns a truncated string that has the length'
+        'based on the limit provided', () {
+      final sentence = 'The quick brown fox jumps over the lazy dog';
+      expect(sentence.limit(20), 'The quick brown fox...');
+    });
 
     test(
-      'returns the same string if the length of the string is less than provided limit',
-      () {
-        final sentence = 'The quick brown fox';
-        expect(sentence.limit(20), 'The quick brown fox');
-      },
-    );
+        'returns the same string if the length of the string'
+        'is less than provided limit', () {
+      final sentence = 'The quick brown fox';
+      expect(sentence.limit(20), 'The quick brown fox');
+    });
 
     test(
-      'returns a truncated string that has the length based on the limit provided without trimming the spaces at the end',
-      () {
-        final sentence = 'The quick brown fox jumps over the lazy dog';
-        expect(sentence.limit(20, trim: false), 'The quick brown fox ...');
-      },
-    );
+        'returns a truncated string that has the length based on the limit'
+        'provided without trimming the spaces at the end', () {
+      final sentence = 'The quick brown fox jumps over the lazy dog';
+      expect(sentence.limit(20, trim: false), 'The quick brown fox ...');
+    });
 
     test(
-      'returns a truncated string that has the length based on the limit provided with a custom ending string',
-      () {
-        final sentence = 'The quick brown fox jumps over the lazy dog';
-        expect(sentence.limit(20, end: ' (...)'), 'The quick brown fox (...)');
-      },
-    );
+        'returns a truncated string that has the length based on the limit'
+        'provided with a custom ending string', () {
+      final sentence = 'The quick brown fox jumps over the lazy dog';
+      expect(sentence.limit(20, end: ' (...)'), 'The quick brown fox (...)');
+    });
   });
 }
