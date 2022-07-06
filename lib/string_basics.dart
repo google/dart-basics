@@ -200,6 +200,32 @@ extension StringBasics on String {
     }
     return stringBuffer.toString();
   }
+
+  /// Returns a truncated version of the string.
+  ///
+  /// Example:
+  /// ```dart
+  /// final sentence = 'The quick brown fox jumps over the lazy dog';
+  /// final truncated = sentence.limit(20); // 'The quick brown fox...'
+  /// ```
+  ///
+  /// The [limit] is the truncated length of the string.
+  /// The [end] is the suffix or ending string of the truncated string.
+  /// The [trim] is whether or not to trim the spaces of the truncated string
+  /// before appending the ending string.
+  String limit(int limit, {String end = '...', bool trim = true}) {
+    if (this.length <= limit) {
+      return this;
+    }
+
+    String truncated = this.slice(start: 0, end: limit);
+
+    if (trim) {
+      return truncated.trim() + end;
+    }
+
+    return truncated + end;
+  }
 }
 
 extension NullableStringBasics on String? {
