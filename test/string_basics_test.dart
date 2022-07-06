@@ -360,8 +360,8 @@ void main() {
     });
 
     test(
-        'returns same string if the first character is not an alphabet character',
-        () {
+        'returns same string if the first character is not an'
+        'alphabet character', () {
       expect('1bravo'.upperCaseFirst(), '1bravo');
       expect('2nd'.upperCaseFirst(), '2nd');
     });
