@@ -359,7 +359,9 @@ void main() {
       expect('hello World'.upperCaseFirst(), 'Hello World');
     });
 
-    test('returns same string if the first character is not an alphabet character', () {
+    test(
+        'returns same string if the first character is not an alphabet character',
+        () {
       expect('1bravo'.upperCaseFirst(), '1bravo');
       expect('2nd'.upperCaseFirst(), '2nd');
     });
