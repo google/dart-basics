@@ -241,9 +241,5 @@ extension NullableStringBasics on String? {
   /// final String? test = null;
   /// final result = test.upperCaseFirst(); // null
   /// ```
-  String? upperCaseFirst() {
-    if (this == null) return null;
-
-    return this.upperCaseFirst();
-  }
+  String? upperCaseFirst() => this == null ? null : this.upperCaseFirst();
 }
