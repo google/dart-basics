@@ -353,21 +353,21 @@ void main() {
     });
   });
 
-  group('upperCaseFirst', () {
+  group('capitalizeFirst', () {
     test('returns a new string with the first character is upper case', () {
-      expect('foo'.upperCaseFirst(), 'Foo');
-      expect('hello World'.upperCaseFirst(), 'Hello World');
+      expect('foo'.capitalizeFirst(), 'Foo');
+      expect('hello World'.capitalizeFirst(), 'Hello World');
     });
 
     test(
         'returns same string if the first character is not an'
         'alphabet character', () {
-      expect('1bravo'.upperCaseFirst(), '1bravo');
-      expect('2nd'.upperCaseFirst(), '2nd');
+      expect('1bravo'.capitalizeFirst(), '1bravo');
+      expect('2nd'.capitalizeFirst(), '2nd');
     });
 
     test('returns empty if the string is empty', () {
-      expect(''.upperCaseFirst(), '');
+      expect(''.capitalizeFirst(), '');
     });
   });
 }
