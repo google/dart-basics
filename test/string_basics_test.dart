@@ -359,7 +359,8 @@ void main() {
       expect('hello World'.capitalizeFirst(), 'Hello World');
     });
 
-    test('returns a new string with the first non-ASCII unicode character'
+    test(
+        'returns a new string with the first non-ASCII unicode character'
         'or accented characters in upper case', () {
       expect('éfoo'.capitalizeFirst(), 'Éfoo');
     });
@@ -377,8 +378,6 @@ void main() {
       expect(''.capitalizeFirst(), '');
     });
 
-    test('non-ASCII unicode characters', () {
-
-    });
+    test('non-ASCII unicode characters', () {});
   });
 }
