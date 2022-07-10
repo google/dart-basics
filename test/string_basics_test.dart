@@ -354,9 +354,14 @@ void main() {
   });
 
   group('capitalizeFirst', () {
-    test('returns a new string with the first character is upper case', () {
+    test('returns a new string with the first character in upper case', () {
       expect('foo'.capitalizeFirst(), 'Foo');
       expect('hello World'.capitalizeFirst(), 'Hello World');
+    });
+
+    test('returns a new string with the first non-ASCII unicode character'
+        'or accented characters in upper case', () {
+      expect('éfoo'.capitalizeFirst(), 'Éfoo');
     });
 
     test(
@@ -364,10 +369,16 @@ void main() {
         'alphabet character', () {
       expect('1bravo'.capitalizeFirst(), '1bravo');
       expect('2nd'.capitalizeFirst(), '2nd');
+      expect('ßfoo'.capitalizeFirst(), 'ßfoo');
+      expect('文foo'.capitalizeFirst(), '文foo');
     });
 
     test('returns empty if the string is empty', () {
       expect(''.capitalizeFirst(), '');
+    });
+
+    test('non-ASCII unicode characters', () {
+
     });
   });
 }
