@@ -202,6 +202,7 @@ extension StringBasics on String {
   }
 
   /// Returns a string with the first character in upper case.
+  ///
   /// This method can capitalize first character
   /// that is either alphabetic or accented.
   ///
