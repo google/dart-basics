@@ -377,7 +377,5 @@ void main() {
     test('returns empty if the string is empty', () {
       expect(''.capitalize(), '');
     });
-
-    test('non-ASCII unicode characters', () {});
   });
 }
