@@ -225,7 +225,7 @@ extension StringBasics on String {
   /// final test = '';
   /// final result = test.capitalizeFirst(); // ''
   /// ```
-  String capitalizeFirst() {
+  String capitalize() {
     if (this.isEmpty) return '';
 
     // trim this string first
