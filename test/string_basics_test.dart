@@ -353,7 +353,7 @@ void main() {
     });
   });
 
-  group('capitalizeFirst', () {
+  group('capitalize', () {
     test('returns a new string with the first character in upper case', () {
       expect('foo'.capitalize(), 'Foo');
       expect('hello World'.capitalize(), 'Hello World');
