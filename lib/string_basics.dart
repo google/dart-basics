@@ -221,7 +221,7 @@ extension StringBasics on String {
     String truncated = this.slice(start: 0, end: length);
 
     if (trim) {
-      return truncated.trim() + end;
+      return truncated.trimRight() + end;
     }
 
     return truncated + end;
