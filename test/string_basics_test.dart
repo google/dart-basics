@@ -372,15 +372,18 @@ void main() {
         'returns a truncated string that has the length based on the length'
         'provided without trimming the spaces at the end', () {
       final sentence = 'The quick brown fox jumps over the lazy dog';
-      expect(sentence.truncate(20, trim: false), 'The quick brown fox ');
+      expect(sentence.truncate(20, trimTrailingWhitespace: false),
+          'The quick brown fox ');
     });
 
     test(
         'returns a truncated string that has the length based on the length'
         'provided with a custom ending string', () {
       final sentence = 'The quick brown fox jumps over the lazy dog';
-      expect(sentence.truncate(20, substitution: ' (...)'), 'The quick brown fox (...)');
-      expect(sentence.truncate(20, substitution: '...'), 'The quick brown fox...');
+      expect(sentence.truncate(20, substitution: ' (...)'),
+          'The quick brown fox (...)');
+      expect(
+          sentence.truncate(20, substitution: '...'), 'The quick brown fox...');
     });
   });
 }
