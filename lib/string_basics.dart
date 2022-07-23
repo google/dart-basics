@@ -206,19 +206,19 @@ extension StringBasics on String {
   /// Example:
   /// ```dart
   /// final sentence = 'The quick brown fox jumps over the lazy dog';
-  /// final truncated = sentence.limit(20); // 'The quick brown fox...'
+  /// final truncated = sentence.truncate(20); // 'The quick brown fox...'
   /// ```
   ///
-  /// The [limit] is the truncated length of the string.
+  /// The [length] is the truncated length of the string.
   /// The [end] is the suffix or ending string of the truncated string.
   /// The [trim] is whether or not to trim the spaces of the truncated string
   /// before appending the ending string.
-  String limit(int limit, {String end = '...', bool trim = true}) {
-    if (this.length <= limit) {
+  String truncate(int length, {String end = '...', bool trim = true}) {
+    if (this.length <= length) {
       return this;
     }
 
-    String truncated = this.slice(start: 0, end: limit);
+    String truncated = this.slice(start: 0, end: length);
 
     if (trim) {
       return truncated.trim() + end;
