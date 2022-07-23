@@ -210,21 +210,24 @@ extension StringBasics on String {
   /// ```
   ///
   /// The [length] is the truncated length of the string.
-  /// The [end] is the suffix or ending string of the truncated string.
-  /// The [trim] is whether or not to trim the spaces of the truncated string
+  /// The [substitution] is the substituting string of the truncated characters.
+  /// If not null or empty it will be appended at the end of the truncated string.
+  /// The [trimTrailingWhitespace] is whether or not to trim the spaces of the truncated string
   /// before appending the ending string.
-  String truncate(int length, {String end = '...', bool trim = true}) {
+  String truncate(
+    int length, {
+    String substitution = '',
+    bool trimTrailingWhitespace = true,
+  }) {
     if (this.length <= length) {
       return this;
     }
 
     String truncated = this.slice(start: 0, end: length);
 
-    if (trim) {
-      return truncated.trimRight() + end;
-    }
+    if (trimTrailingWhitespace) return truncated.trimRight() + substitution;
 
-    return truncated + end;
+    return truncated + substitution;
   }
 }
 
