@@ -378,12 +378,52 @@ void main() {
 
     test(
         'returns a truncated string that has the length based on the length'
-        'provided with a custom ending string', () {
+        'provided with a custom substitution string', () {
       final sentence = 'The quick brown fox jumps over the lazy dog';
       expect(sentence.truncate(20, substitution: ' (...)'),
           'The quick brown fox (...)');
       expect(
           sentence.truncate(20, substitution: '...'), 'The quick brown fox...');
+    });
+
+    test(
+        'returns a truncated string that has the length based on the length'
+        'provided with a custom ending string but the substitution length will be included',
+        () {
+      final sentence = 'The quick brown fox jumps over the lazy dog';
+      expect(
+        sentence.truncate(
+          12,
+          substitution: '...',
+          includeSubstitutionLength: true,
+        ),
+        'The quick...',
+      );
+    });
+
+    test(
+        'returns a truncated string with emojis that has the length'
+        'based on the length provided', () {
+      final sentence = 'The quick brown 🦊🦊🦊 jumps over the lazy 🐶🐶🐶';
+
+      expect(
+        sentence.truncate(42),
+        'The quick brown 🦊🦊🦊 jumps over the lazy 🐶🐶',
+      );
+
+      expect(
+        sentence.truncate(42, substitution: '🐾🐾🐾'),
+        'The quick brown 🦊🦊🦊 jumps over the lazy 🐶🐶🐾🐾🐾',
+      );
+
+      expect(
+        sentence.truncate(
+          18,
+          substitution: '...',
+          includeSubstitutionLength: true,
+        ),
+        'The quick brown 🦊...',
+      );
     });
   });
 }
