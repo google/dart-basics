@@ -2,6 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:characters/characters.dart';
 import 'src/slice_indices.dart';
 
 /// Utility extension methods for the native [String] class.
@@ -218,16 +219,25 @@ extension StringBasics on String {
     int length, {
     String substitution = '',
     bool trimTrailingWhitespace = true,
+    bool includeSubstitutionLength = false,
   }) {
     if (this.length <= length) {
       return this;
     }
 
-    String truncated = this.slice(start: 0, end: length);
+    String truncated = this.characters.take(length).toString();
 
-    if (trimTrailingWhitespace) return truncated.trimRight() + substitution;
+    if (includeSubstitutionLength) {
+      // reduce the length with substitution length
+      final newLength = truncated.length - substitution.length;
 
-    return truncated + substitution;
+      // reduce the truncated string by the substitution length
+      // since we will be considering the substitution to the target length
+      truncated = truncated.characters.take(newLength).toString();
+    }
+
+    return (trimTrailingWhitespace ? truncated.trimRight() : truncated) +
+        substitution;
   }
 }
 
