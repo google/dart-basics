@@ -422,7 +422,7 @@ void main() {
           substitution: '...',
           includeSubstitutionInLength: true,
         ),
-        'The quick brown 🦊...',
+        'The quick brown...',
       );
     });
   });

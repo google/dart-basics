@@ -228,17 +228,12 @@ extension StringBasics on String {
       return this;
     }
 
-    String truncated = this.characters.take(length).toString();
+    // calculate the final truncate length where whether or not to include the length of substitution string
+    final truncatedLength =
+        includeSubstitutionInLength ? (length - substitution.length) : length;
+    final truncated = this.characters.take(truncatedLength).toString();
 
-    if (includeSubstitutionInLength) {
-      // reduce the length with substitution length
-      final newLength = truncated.length - substitution.length;
-
-      // reduce the truncated string by the substitution length
-      // since we will be considering the substitution to the target length
-      truncated = truncated.characters.take(newLength).toString();
-    }
-
+    // finally trim the trailing white space if needed
     return (trimTrailingWhitespace ? truncated.trimRight() : truncated) +
         substitution;
   }
