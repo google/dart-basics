@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import 'package:characters/characters.dart';
+
 import 'src/slice_indices.dart';
 
 /// Utility extension methods for the native [String] class.
