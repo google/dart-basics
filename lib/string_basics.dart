@@ -215,13 +215,13 @@ extension StringBasics on String {
   /// If not null or empty it will be appended at the end of the truncated string.
   /// The [trimTrailingWhitespace] is whether or not to trim the spaces of the truncated string
   /// before appending the ending string.
-  /// The [includeSubstitutionLength] is whether or not that the length of the substitution string will be included
+  /// The [includeSubstitutionInLength] is whether or not that the length of the substitution string will be included
   /// with the intended truncated length.
   String truncate(
     int length, {
     String substitution = '',
     bool trimTrailingWhitespace = true,
-    bool includeSubstitutionLength = false,
+    bool includeSubstitutionInLength = false,
   }) {
     if (this.length <= length) {
       return this;
@@ -229,7 +229,7 @@ extension StringBasics on String {
 
     String truncated = this.characters.take(length).toString();
 
-    if (includeSubstitutionLength) {
+    if (includeSubstitutionInLength) {
       // reduce the length with substitution length
       final newLength = truncated.length - substitution.length;
 

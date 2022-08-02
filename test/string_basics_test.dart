@@ -395,7 +395,7 @@ void main() {
         sentence.truncate(
           12,
           substitution: '...',
-          includeSubstitutionLength: true,
+          includeSubstitutionInLength: true,
         ),
         'The quick...',
       );
@@ -420,7 +420,7 @@ void main() {
         sentence.truncate(
           18,
           substitution: '...',
-          includeSubstitutionLength: true,
+          includeSubstitutionInLength: true,
         ),
         'The quick brown 🦊...',
       );
