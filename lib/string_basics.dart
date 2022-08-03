@@ -229,8 +229,9 @@ extension StringBasics on String {
     }
 
     // calculate the final truncate length where whether or not to include the length of substitution string
-    final truncatedLength =
-        includeSubstitutionInLength ? (length - substitution.length) : length;
+    final truncatedLength = includeSubstitutionInLength
+        ? (length - substitution.characters.length)
+        : length;
     final truncated = this.characters.take(truncatedLength).toString();
 
     // finally trim the trailing white space if needed

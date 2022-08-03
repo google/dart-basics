@@ -424,6 +424,15 @@ void main() {
         ),
         'The quick brown...',
       );
+
+      expect(
+        sentence.truncate(
+          18,
+          substitution: '😀',
+          includeSubstitutionInLength: true,
+        ),
+        'The quick brown 🦊😀',
+      );
     });
   });
 }
