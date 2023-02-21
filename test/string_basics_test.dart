@@ -352,4 +352,30 @@ void main() {
       expect('a'.isNotNullOrBlank, isTrue);
     });
   });
+
+  group('capitalize', () {
+    test('returns a new string with the first character in upper case', () {
+      expect('foo'.capitalize(), 'Foo');
+      expect('hello World'.capitalize(), 'Hello World');
+    });
+
+    test(
+        'returns a new string with the first non-ASCII unicode character'
+        'or accented characters in upper case', () {
+      expect('éfoo'.capitalize(), 'Éfoo');
+    });
+
+    test(
+        'returns same string if the first character is not an'
+        'alphabet character', () {
+      expect('1bravo'.capitalize(), '1bravo');
+      expect('2nd'.capitalize(), '2nd');
+      expect('ßfoo'.capitalize(), 'ßfoo');
+      expect('文foo'.capitalize(), '文foo');
+    });
+
+    test('returns empty if the string is empty', () {
+      expect(''.capitalize(), '');
+    });
+  });
 }

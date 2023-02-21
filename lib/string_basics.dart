@@ -200,6 +200,42 @@ extension StringBasics on String {
     }
     return stringBuffer.toString();
   }
+
+  /// Returns a string with the first character in upper case.
+  ///
+  /// This method can capitalize first character
+  /// that is either alphabetic or accented.
+  ///
+  /// If the first character is not alphabetic then return the same string.
+  /// If [this] is empty, returns and empty string.
+  ///
+  /// Example:
+  /// ```dart
+  /// final foo = 'bar';
+  /// final baz = foo.capitalizeFirst(); // 'Bar'
+  ///
+  /// // accented first character
+  /// final og = 'éfoo';
+  /// final capitalized = og.capitalizeFirst() // 'Éfoo'
+  ///
+  /// // non alphabetic first character
+  /// final foo1 = '1bar';
+  /// final baz1 = foo1.capitalizeFirst(); // '1bar'
+  ///
+  /// final test = '';
+  /// final result = test.capitalizeFirst(); // ''
+  /// ```
+  String capitalize() {
+    if (this.isEmpty) return '';
+
+    // trim this string first
+    final trimmed = this.trimLeft();
+
+    // convert the first character to upper case
+    final firstCharacter = trimmed[0].toUpperCase();
+
+    return trimmed.replaceRange(0, 1, firstCharacter);
+  }
 }
 
 extension NullableStringBasics on String? {
