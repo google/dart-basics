@@ -27,10 +27,7 @@ extension SetBasics<E> on Set<E> {
   /// set.isDisjointWith({'d', 'e', 'f'}); // true
   /// set.isDisjointWith({'d', 'e', 'b'}); // false
   /// ```
-  bool isDisjointWith(Set<Object> other) =>
-      this
-          .intersection(other)
-          .isEmpty;
+  bool isDisjointWith(Set<Object> other) => this.intersection(other).isEmpty;
 
   /// Returns `true` if [this] and [other] have at least one element in common.
   ///
@@ -41,9 +38,7 @@ extension SetBasics<E> on Set<E> {
   /// set.isIntersectingWith({'d', 'e', 'f'}); // false
   /// ```
   bool isIntersectingWith(Set<Object> other) =>
-      this
-          .intersection(other)
-          .isNotEmpty;
+      this.intersection(other).isNotEmpty;
 
   /// Returns `true` if every element of [this] is contained in [other].
   ///

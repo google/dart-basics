@@ -26,17 +26,11 @@ extension StringBasics on String {
 
   /// Returns `true` if [this] is empty or consists solely of whitespace
   /// characters as defined by [String.trim].
-  bool get isBlank =>
-      this
-          .trim()
-          .isEmpty;
+  bool get isBlank => this.trim().isEmpty;
 
   /// Returns `true` if [this] is not empty and does not consist solely of
   /// whitespace characters as defined by [String.trim].
-  bool get isNotBlank =>
-      this
-          .trim()
-          .isNotEmpty;
+  bool get isNotBlank => this.trim().isNotEmpty;
 
   /// Returns a copy of [this] with [prefix] removed if it is present.
   ///
@@ -48,13 +42,9 @@ extension StringBasics on String {
   /// string.withoutPrefix('ab'); // 'c'
   /// string.withoutPrefix('z'); // 'abc'
   /// ```
-  String withoutPrefix(Pattern prefix) =>
-      this.startsWith(prefix)
-          ? this.substring(prefix
-          .allMatches(this)
-          .first
-          .end)
-          : this;
+  String withoutPrefix(Pattern prefix) => this.startsWith(prefix)
+      ? this.substring(prefix.allMatches(this).first.end)
+      : this;
 
   /// Returns a copy of [this] with [suffix] removed if it is present.
   ///
@@ -82,11 +72,11 @@ extension StringBasics on String {
   /// 'word'.insert('ke', 3); // 'worked'
   /// 'word'.insert('y', 4); // 'wordy'
   /// ```
-  String insert(String other, int index) =>
-      (StringBuffer()
-        ..write(this.substring(0, index))..write(other)..write(
-            this.substring(index)))
-          .toString();
+  String insert(String other, int index) => (StringBuffer()
+        ..write(this.substring(0, index))
+        ..write(other)
+        ..write(this.substring(index)))
+      .toString();
 
   /// Returns the concatenation of [other] and [this].
   ///
@@ -228,7 +218,8 @@ extension StringBasics on String {
   /// before appending the ending string.
   /// The [includeSubstitutionInLength] is whether or not that the length of the substitution string will be included
   /// with the intended truncated length.
-  String truncate(int length, {
+  String truncate(
+    int length, {
     String substitution = '',
     bool trimTrailingWhitespace = true,
     bool includeSubstitutionInLength = false,
@@ -288,15 +279,9 @@ extension StringBasics on String {
 extension NullableStringBasics on String? {
   /// Returns `true` if [this] is null, empty, or consists solely of
   /// whitespace characters as defined by [String.trim].
-  bool get isNullOrBlank =>
-      this
-          ?.trim()
-          .isEmpty ?? true;
+  bool get isNullOrBlank => this?.trim().isEmpty ?? true;
 
   /// Returns `true` if [this] is not null, not empty, and does not consist
   /// solely of whitespace characters as defined by [String.trim].
-  bool get isNotNullOrBlank =>
-      this
-          ?.trim()
-          .isNotEmpty ?? false;
+  bool get isNotNullOrBlank => this?.trim().isNotEmpty ?? false;
 }
