@@ -1,3 +1,8 @@
+## [0.10.0]
+
+* Added `truncate` method to `String`.
+* Added `capitalize` method to `String`.
+
 ## [0.9.0]
 
 * Added `average` method to `Iterable`.
