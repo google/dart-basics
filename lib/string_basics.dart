@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import 'package:characters/characters.dart';
+
 import 'src/slice_indices.dart';
 
 /// Utility extension methods for the native [String] class.
@@ -199,6 +201,42 @@ extension StringBasics on String {
       stringBuffer.write(this[i]);
     }
     return stringBuffer.toString();
+  }
+
+  /// Returns a truncated version of the string.
+  ///
+  /// Example:
+  /// ```dart
+  /// final sentence = 'The quick brown fox jumps over the lazy dog';
+  /// final truncated = sentence.truncate(20); // 'The quick brown fox...'
+  /// ```
+  ///
+  /// The [length] is the truncated length of the string.
+  /// The [substitution] is the substituting string of the truncated characters.
+  /// If not null or empty it will be appended at the end of the truncated string.
+  /// The [trimTrailingWhitespace] is whether or not to trim the spaces of the truncated string
+  /// before appending the ending string.
+  /// The [includeSubstitutionInLength] is whether or not that the length of the substitution string will be included
+  /// with the intended truncated length.
+  String truncate(
+    int length, {
+    String substitution = '',
+    bool trimTrailingWhitespace = true,
+    bool includeSubstitutionInLength = false,
+  }) {
+    if (this.length <= length) {
+      return this;
+    }
+
+    // calculate the final truncate length where whether or not to include the length of substitution string
+    final truncatedLength = includeSubstitutionInLength
+        ? (length - substitution.characters.length)
+        : length;
+    final truncated = this.characters.take(truncatedLength).toString();
+
+    // finally trim the trailing white space if needed
+    return (trimTrailingWhitespace ? truncated.trimRight() : truncated) +
+        substitution;
   }
 
   /// Returns a string with the first character in upper case.

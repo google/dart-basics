@@ -353,6 +353,89 @@ void main() {
     });
   });
 
+  group('truncate', () {
+    test(
+        'returns a truncated string that has the length'
+        'based on the limit provided', () {
+      final sentence = 'The quick brown fox jumps over the lazy dog';
+      expect(sentence.truncate(20), 'The quick brown fox');
+    });
+
+    test(
+        'returns the same string if the length of the string'
+        'is less than provided limit', () {
+      final sentence = 'The quick brown fox';
+      expect(sentence.truncate(20), 'The quick brown fox');
+    });
+
+    test(
+        'returns a truncated string that has the length based on the length'
+        'provided without trimming the spaces at the end', () {
+      final sentence = 'The quick brown fox jumps over the lazy dog';
+      expect(sentence.truncate(20, trimTrailingWhitespace: false),
+          'The quick brown fox ');
+    });
+
+    test(
+        'returns a truncated string that has the length based on the length'
+        'provided with a custom substitution string', () {
+      final sentence = 'The quick brown fox jumps over the lazy dog';
+      expect(sentence.truncate(20, substitution: ' (...)'),
+          'The quick brown fox (...)');
+      expect(
+          sentence.truncate(20, substitution: '...'), 'The quick brown fox...');
+    });
+
+    test(
+        'returns a truncated string that has the length based on the length'
+        'provided with a custom ending string but the substitution length will be included',
+        () {
+      final sentence = 'The quick brown fox jumps over the lazy dog';
+      expect(
+        sentence.truncate(
+          12,
+          substitution: '...',
+          includeSubstitutionInLength: true,
+        ),
+        'The quick...',
+      );
+    });
+
+    test(
+        'returns a truncated string with emojis that has the length'
+        'based on the length provided', () {
+      final sentence = 'The quick brown 🦊🦊🦊 jumps over the lazy 🐶🐶🐶';
+
+      expect(
+        sentence.truncate(42),
+        'The quick brown 🦊🦊🦊 jumps over the lazy 🐶🐶',
+      );
+
+      expect(
+        sentence.truncate(42, substitution: '🐾🐾🐾'),
+        'The quick brown 🦊🦊🦊 jumps over the lazy 🐶🐶🐾🐾🐾',
+      );
+
+      expect(
+        sentence.truncate(
+          18,
+          substitution: '...',
+          includeSubstitutionInLength: true,
+        ),
+        'The quick brown...',
+      );
+
+      expect(
+        sentence.truncate(
+          18,
+          substitution: '😀',
+          includeSubstitutionInLength: true,
+        ),
+        'The quick brown 🦊😀',
+      );
+    });
+  });
+
   group('capitalize', () {
     test('returns a new string with the first character in upper case', () {
       expect('foo'.capitalize(), 'Foo');
