@@ -250,18 +250,18 @@ extension StringBasics on String {
   /// Example:
   /// ```dart
   /// final foo = 'bar';
-  /// final baz = foo.capitalizeFirst(); // 'Bar'
+  /// final baz = foo.capitalize(); // 'Bar'
   ///
   /// // accented first character
   /// final og = 'éfoo';
-  /// final capitalized = og.capitalizeFirst() // 'Éfoo'
+  /// final capitalized = og.capitalize() // 'Éfoo'
   ///
   /// // non alphabetic first character
   /// final foo1 = '1bar';
-  /// final baz1 = foo1.capitalizeFirst(); // '1bar'
+  /// final baz1 = foo1.capitalize(); // '1bar'
   ///
   /// final test = '';
-  /// final result = test.capitalizeFirst(); // ''
+  /// final result = test.capitalize(); // ''
   /// ```
   String capitalize() {
     if (this.isEmpty) return '';
