@@ -1,3 +1,10 @@
+## [0.11.0]
+
+* Require Dart 2.19.
+
+* Removed `DateTimeBasics.copyWith` in favor of Dart 2.19's own `copyWith`
+  extension method on `DateTime`.
+
 ## [0.10.0]
 
 * Added `truncate` method to `String`.

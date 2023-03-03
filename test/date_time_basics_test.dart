@@ -86,47 +86,6 @@ void main() {
     });
   });
 
-  group('copyWith:', () {
-    test('Copies existing values', () {
-      var copy = utcTime.copyWith();
-      expect(utcTime, isNot(same(copy)));
-      expect(utcTime, copy);
-
-      copy = localTime.copyWith();
-      expect(localTime, isNot(same(copy)));
-      expect(localTime, copy);
-    });
-
-    test('Overrides existing values', () {
-      final utcOverrides = DateTime.utc(2000, 1, 2, 3, 4, 5, 6, 7);
-      final localOverrides = utcOverrides.toLocal();
-
-      var copy = utcTime.copyWith(
-        year: utcOverrides.year,
-        month: utcOverrides.month,
-        day: utcOverrides.day,
-        hour: utcOverrides.hour,
-        minute: utcOverrides.minute,
-        second: utcOverrides.second,
-        millisecond: utcOverrides.millisecond,
-        microsecond: utcOverrides.microsecond,
-      );
-      expect(copy, utcOverrides);
-
-      copy = localTime.copyWith(
-        year: localOverrides.year,
-        month: localOverrides.month,
-        day: localOverrides.day,
-        hour: localOverrides.hour,
-        minute: localOverrides.minute,
-        second: localOverrides.second,
-        millisecond: localOverrides.millisecond,
-        microsecond: localOverrides.microsecond,
-      );
-      expect(copy, localOverrides);
-    });
-  });
-
   test('calendarDayTo works', () {
     expect(DateTime(2020, 12, 31).calendarDaysTill(2021, 1, 1), 1);
     expect(DateTime(2020, 12, 31, 23, 59).calendarDaysTill(2021, 1, 1), 1);
