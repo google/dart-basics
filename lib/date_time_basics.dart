@@ -83,32 +83,8 @@ extension DateTimeBasics on DateTime {
   /// the same contract.
   bool isAtOrAfter(DateTime other) => isAtSameMomentAs(other) || isAfter(other);
 
-  /// Copies a [DateTime], overriding specified values.
-  ///
-  /// A UTC [DateTime] will remain in UTC; a local [DateTime] will remain local.
-  DateTime copyWith({
-    int? year,
-    int? month,
-    int? day,
-    int? hour,
-    int? minute,
-    int? second,
-    int? millisecond,
-    int? microsecond,
-  }) {
-    return (isUtc ? DateTime.utc : DateTime.new)(
-      year ?? this.year,
-      month ?? this.month,
-      day ?? this.day,
-      hour ?? this.hour,
-      minute ?? this.minute,
-      second ?? this.second,
-      millisecond ?? this.millisecond,
-      microsecond ?? this.microsecond,
-    );
-  }
-
-  /// Adds a specified number of days to this [DateTime].
+  /// Returns a new [DateTime] computed from adding a specified number of days
+  /// to this one.
   ///
   /// Unlike `DateTime.add(Duration(days: numberOfDays))`, this adds calendar
   /// days and not 24-hour increments.  When possible, it therefore leaves the
@@ -123,7 +99,7 @@ extension DateTimeBasics on DateTime {
   /// Returns a negative value if the specified date is in the past.  Ignores
   /// the time of day.
   ///
-  /// Example:
+  /// Examples:
   /// ```
   /// DateTime(2020, 12, 31).calendarDaysTill(2021, 1, 1); // 1
   /// DateTime(2020, 12, 31, 23, 59).calendarDaysTill(2021, 1, 1); // 1
@@ -142,5 +118,24 @@ extension DateTimeBasics on DateTime {
     final startDay = DateTime.utc(this.year, this.month, this.day);
     final endDay = DateTime.utc(year, month, day);
     return (endDay - startDay).inDays;
+  }
+
+  /// Returns a new [DateTime] computed from adding a specified number of months
+  /// to this one.
+  ///
+  /// Attempts to preserve the day of the month and the time when possible.
+  /// If the current day of the month does not exist in the new month, the
+  /// last day of the new month will be returned.
+  ///
+  /// Examples:
+  /// ```
+  /// DateTime(2023, 1, 31, 2).addCalendarMonths(1); // 2023-02-28 02:00:00.000
+  /// DateTime(2023, 1, 31, 2).addCalendarMonths(-1) // 2022-12-31 02:00:00.000
+  /// ```
+  DateTime addCalendarMonths(int numberOfMonths) {
+    var newMonth = month + numberOfMonths;
+    var result = copyWith(month: newMonth);
+    var lastDayOfNewMonth = copyWith(month: newMonth + 1, day: 0);
+    return result.isAfter(lastDayOfNewMonth) ? lastDayOfNewMonth : result;
   }
 }
