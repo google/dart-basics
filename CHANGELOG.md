@@ -5,6 +5,8 @@
 * Removed `DateTimeBasics.copyWith` in favor of Dart 2.19's own `copyWith`
   extension method on `DateTime`.
 
+* Added `DateTimeBasics.addCalendarMonths`.
+
 ## [0.10.0]
 
 * Added `truncate` method to `String`.

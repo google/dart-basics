@@ -86,7 +86,7 @@ void main() {
     });
   });
 
-  test('calendarDayTo works', () {
+  test('calendarDayTill works', () {
     expect(DateTime(2020, 12, 31).calendarDaysTill(2021, 1, 1), 1);
     expect(DateTime(2020, 12, 31, 23, 59).calendarDaysTill(2021, 1, 1), 1);
     expect(DateTime(2021, 1, 1).calendarDaysTill(2020, 12, 31), -1);
@@ -131,6 +131,47 @@ void main() {
       // This test is unfortunately dependent on the local timezone and is not
       // meaningful if the local timezone does not observe daylight saving time.
     }, skip: !_observesDaylightSaving());
+  });
+
+  group('addCalendarMonths:', () {
+    test('Works when adding 0 months', () {
+      var dt = DateTime(2020, 1, 1, 12, 34, 56);
+      expect(dt.addCalendarMonths(0), dt);
+    });
+
+    test('Preserves fields normally', () {
+      expect(
+        DateTime(2023, 1, 23, 12, 34, 56).addCalendarMonths(1),
+        DateTime(2023, 2, 23, 12, 34, 56),
+      );
+
+      expect(
+        DateTime(2023, 1, 31, 12, 34, 56).addCalendarMonths(2),
+        DateTime(2023, 3, 31, 12, 34, 56),
+      );
+
+      expect(
+        DateTime(2023, 1, 23, 12, 34, 56).addCalendarMonths(-1),
+        DateTime(2022, 12, 23, 12, 34, 56),
+      );
+
+      expect(
+        DateTime(2023, 1, 23, 12, 34, 56).addCalendarMonths(12),
+        DateTime(2024, 1, 23, 12, 34, 56),
+      );
+    });
+
+    test('Behaves when the day is invalid for the new month', () {
+      expect(
+        DateTime(2023, 1, 31, 12, 34, 56).addCalendarMonths(1),
+        DateTime(2023, 2, 28, 12, 34, 56),
+      );
+
+      expect(
+        DateTime(2023, 1, 31, 12, 34, 56).addCalendarMonths(-2),
+        DateTime(2022, 11, 30, 12, 34, 56),
+      );
+    });
   });
 }
 
